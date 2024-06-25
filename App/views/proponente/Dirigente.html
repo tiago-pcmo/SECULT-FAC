@@ -1,0 +1,278 @@
+﻿<div class="well">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4>Dados do dirigente</h4>
+            <div class="row">
+                <div class="form-group col-md-6" show-errors>
+                    <label for="nomeDirigente" class="control-label">Nome</label>
+                    <input id="nomeDirigente" name="nomedirigente" type="text" class="form-control" ng-model="proponente.dirigente.nome" ng-required="juridica">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="nomeSocial" class="control-label">Nome social</label>
+                    <input id="nomeSocial" name="nomeSocial" type="text" class="form-control" ng-model="proponente.dirigente.nomeSocial" ng-required="juridica">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3" show-errors>
+                    <label for="cpfdirigente" class="control-label">CPF</label>
+                    <input id="cpfdirigente" name="cpfdirigente" type="text" class="form-control" ng-model="proponente.dirigente.cpf" ng-required="juridica" mask="000.000.000-00" ng-disabled="modoEdicao">
+                </div>
+                <div class="form-group col-md-3" show-errors>
+                    <label for="rgDirigente" class="control-label">RG</label>
+                    <input id="rgDirigente" name="rgDirigente" type="text" class="form-control" ng-model="proponente.dirigente.rg" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-3" show-errors>
+                    <label for="orgaoExpedidorDirigente" class="control-label">Órgão expedidor</label>
+                    <input id="orgaoExpedidorDirigente" name="orgaoExpedidorDirigente" type="text" class="form-control" ng-model="proponente.dirigente.orgaoExpedidor" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-3" show-errors>
+                    <label for="dataEmissaoDirigente" class="control-label">Data de emissão</label>
+                    <input id="dataEmissaoDirigente" name="dataEmissaoDirigente" type="text" class="form-control" ng-model="proponente.dirigente.dataEmissao" ng-required="juridica" mask="00/00/0000" mask-clean="false">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6" show-errors>
+                    <label for="profissaoDirigente" class="control-label">Profissão</label>
+                    <input id="profissaoDirigente" name="profissaoDirigente" type="text" class="form-control" ng-model="proponente.dirigente.profissao" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-6" show-errors>
+                    <label for="cargoFuncaoDirigente" class="control-label">Cargo ou função</label>
+                    <input id="cargoFuncaoDirigente" name="cargoFuncaoDirigente" type="text" class="form-control" ng-model="proponente.dirigente.cargoFuncao" ng-required="juridica">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2" show-errors>
+                    <label for="dataNascimentoDirigente" class="control-label">Data de nascimento</label>
+                    <input id="dataNascimentoDirigente" name="dataNascimentoDirigente" type="text" class="form-control" ng-model="proponente.dirigente.dataNascimento" ng-required="juridica" mask="00/00/0000" mask-clean="false">
+                </div>
+
+                <div class="form-group col-md-4" show-errors>
+                    <label for="generoDirigente" class="control-label">Gênero</label>
+                    <input id="generoDirigente" name="generoDirigente" type="text" class="form-control" ng-model="proponente.dirigente.sexo" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-3" show-errors>
+                    <label for="escolaridadeDirigente" class="control-label">Escolaridade</label>
+                    <select id="escolaridadeDirigente"
+                            name="escolaridadeDirigente"
+                            class="form-control"
+                            ng-model="proponente.dirigente.escolaridade"
+                            ng-options="escolaridade.descricao for escolaridade in escolaridades track by escolaridade.id" ng-required="juridica">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3" show-errors>
+                    <label for="situacaoDirigente" class="control-label">Situação</label>
+                    <select id="situacaoDirigente"
+                            name="situacaoDirigente"
+                            class="form-control"
+                            ng-model="proponente.dirigente.escolaridadeSituacao"
+                            ng-options="escolaridadeSituacao.descricao for escolaridadeSituacao in escolaridadesSituacoes track by escolaridadeSituacao.id" ng-required="juridica">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12" show-errors>
+                    <label for="atuacaoDirigente" class="control-label">Atuação</label>
+                    <select id="atuacaoDirigente"
+                            name="atuacaoDirigente"
+                            class="form-control"
+                            ng-model="proponente.dirigente.atuacao"
+                            ng-options="atuacao.descricao for atuacao in atuacoes track by atuacao.id"
+                            ng-required="juridica">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" ng-show="proponente.dirigente.atuacao.id == '1' || proponente.dirigente.atuacao.id == '5' || proponente.dirigente.atuacao.id == '6'">
+                <div class="form-group col-md-12" show-errors>
+                    <label for="atuacaoDirigenteDescricao" class="control-label">Área de atuação</label>
+                    <input id="atuacaoDirigenteDescricao"
+                           name="atuacaoDescricao"
+                           type="text"
+                           class="form-control"
+                           ng-model="proponente.dirigente.atuacaoArea"
+                           ng-required="juridica && (proponente.dirigente.atuacao.id == '1' || proponente.dirigente.atuacao.id == '5' || proponente.dirigente.atuacao.id == '6')">
+                </div>
+            </div>
+            <div class="row" ng-show="proponente.dirigente.atuacao.id == '1'">
+                <div class="form-group col-md-12" show-errors>
+                    <label for="funcaoDirigenteDescricao" class="control-label">Função de atuação</label>
+                    <input id="funcaoDirigenteDescricao"
+                           name="funcaoDirigenteDescricao"
+                           type="text"
+                           class="form-control"
+                           ng-model="proponente.dirigente.atuacaoFuncao"
+                           ng-required="juridica && proponente.dirigente.atuacao.id == '1'">
+                </div>
+            </div>
+            <hr />
+            <h4>Endereço do dirigente</h4>
+            <div class="row">
+                <div class="form-group col-md-12" ng-init="proponente.dirigente.endereco.tipo='RESIDENCIAL'">
+                    <label class="radio-inline">
+                        <input id="residendicalDirigenteR" name="residendicalDirigente" type="radio" ng-model="proponente.dirigente.endereco.tipo" value="RESIDENCIAL">Residencial
+                    </label>
+                    <label class="radio-inline">
+                        <input id="residendicalDirigenteC" name="residendicalDirigente" type="radio" ng-model="proponente.dirigente.endereco.tipo" value="EMPRESARIAL">Empresarial
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2" show-errors>
+                    <label for="cepDirigente" class="control-label">CEP</label>
+                    <input id="cepDirigente" name="cepdirigente" type="text" class="form-control" ng-model="proponente.dirigente.endereco.cep" ng-blur="onCepChange('JURIDICA')" ng-required="juridica" mask="00000-000">
+                </div>
+                <div class="form-group col-md-5" show-errors>
+                    <label for="logradouroDirigente" class="control-label">Logradouro</label>
+                    <input id="logradouroDirigente" name="logradourodirigente" type="text" class="form-control" ng-model="proponente.dirigente.endereco.logradouro" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-5" show-errors>
+                    <label for="complementoDirigente" class="control-label">Complemento</label>
+                    <input id="complementoDirigente" name="complementoDirigente" type="text" class="form-control" ng-model="proponente.dirigente.endereco.complemento" ng-required="juridica">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2" show-errors>
+                    <label for="numeroDirigente" class="control-label">Número</label>
+                    <input id="numeroDirigente" name="numeroDirigente" type="text" class="form-control" ng-model="proponente.dirigente.endereco.numero" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-4" show-errors>
+                    <label for="bairroDirigente" class="control-label">Bairro</label>
+                    <input id="bairroDirigente" name="bairroDirigente" type="text" class="form-control" ng-model="proponente.dirigente.endereco.bairro" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-4" show-errors>
+                    <label for="municipioDirigente" class="control-label">Município</label>
+                    <input id="municipioDirigente" name="municipioDirigente" type="text" class="form-control" ng-model="proponente.dirigente.endereco.municipio" ng-required="juridica">
+                </div>
+                <div class="form-group col-md-2" show-errors>
+                    <label for="ufDirigente" class="control-label">UF</label>
+                    <select id="ufDirigente" name="ufDirigente" class="form-control" ng-model="proponente.dirigente.endereco.uf" ng-required="juridica">
+                        <option value="">Selecione</option>
+                        <option value="AL">AL</option>
+                        <option value="AP">AP</option>
+                        <option value="AM">AM</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MT">MT</option>
+                        <option value="MS">MS</option>
+                        <option value="MG">MG</option>
+                        <option value="PR">PR</option>
+                        <option value="PB">PB</option>
+                        <option value="PA">PA</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="RJ">RJ</option>
+                        <option value="RN">RN</option>
+                        <option value="RS">RS</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="SC">SC</option>
+                        <option value="SE">SE</option>
+                        <option value="SP">SP</option>
+                        <option value="TO">TO</option>
+                    </select>
+                </div>
+            </div>
+            <hr />
+            <h4>Contato do dirigente</h4>
+            <div class="row">
+                <div class="form-group col-md-2" show-errors>
+                    <label for="telefoneDirigente" class="control-label">Telefone</label>
+                    <input id="telefoneDirigente" name="telefonedirigente" type="text" class="form-control" ng-model="proponente.dirigente.telefone" ng-required="juridica" mask="(00) 00000000">
+                </div>
+                <div class="form-group col-md-2" show-errors>
+                    <label for="teleCelularDirigente" class="control-label">Celular</label>
+                    <input id="teleCelularDirigente" name="teleCelularDirigente" type="text" class="form-control" ng-model="proponente.dirigente.celular" ng-required="juridica" mask="(00) 000000000">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="faxDirigente" class="control-label">Fax</label>
+                    <input id="faxDirigente" name="faxDirigente" type="text" class="form-control" ng-model="proponente.dirigente.fax" mask="(00) 00000000">
+                </div>
+                <div class="form-group col-md-6" show-errors>
+                    <label for="emailDirigente" class="control-label">Email</label>
+                    <input id="emailDirigente" name="emailDirigente" type="email" class="form-control" ng-model="proponente.dirigente.email" ng-pattern="/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" ng-required="juridica">
+                </div>
+            </div>
+            <hr />
+            <h4>Dirigente é funcionário público do estado de Goiás?</h4>
+            <div class="well">
+                <div class="row">
+                    <div class="form-group col-md-12" ng-init="proponente.dirigente.funcionarioPublico = false">
+                        <label class="radio-inline">
+                            <input id="dirigenteFuncionarioPublicoSim" type="radio" ng-model="proponente.dirigente.funcionarioPublico" name="dirigenteFuncionarioPublico" ng-value="true">Sim
+                        </label>
+                        <label class="radio-inline">
+                            <input id="dirigenteFuncionarioPublicoNao" type="radio" ng-model="proponente.dirigente.funcionarioPublico" name="dirigenteFuncionarioPublico" ng-value="false">Não
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-5">
+                        <file-upload ng-model="proponente.dirigente.declaracao"
+                                     label="Declaração de não funcionário público (arquivo PDF)"
+                                     nome="Declaração dirigente não func. público"
+                                     extensao="pdf"
+                                     accept=".pdf, application/pdf"
+                                     download-fn="getDeclaracaoDirigente"
+                                     ng-show="proponente.dirigente.funcionarioPublico === false">
+                        </file-upload>
+                    </div>
+                </div>
+            </div>
+            <h4>Dirigente participa de outro projeto inscrito?</h4>
+            <div class="well">
+                <div class="row">
+                    <div class="form-group col-md-12" ng-init="proponente.dirigente.participaOutrosProjetos = false">
+                        <label class="radio-inline">
+                            <input id="dirigenteParticipaOutrosProjetosSim" type="radio" ng-model="proponente.dirigente.participaOutrosProjetos" name="dirigenteParticipaOutrosProjetos" ng-value="true">Sim
+                        </label>
+                        <label class="radio-inline">
+                            <input id="dirigenteParticipaOutrosProjetosNao" type="radio" ng-model="proponente.dirigente.participaOutrosProjetos" name="dirigenteParticipaOutrosProjetos" ng-value="false">Não
+                        </label>
+                    </div>
+                </div>
+                <div class="row" ng-show="proponente.dirigente.participaOutrosProjetos === true">
+                    <div class="form-group col-md-12" show-errors>
+                        <label for="outrosProjetosParticipantesDirigente" class="control-label">Projeto(s)</label>
+                        <textarea id="outrosProjetosParticipantesDirigente"
+                                  name="outrosProjetosParticipantesDirigente"
+                                  class="form-control"
+                                  rows="5"
+                                  ng-model="proponente.dirigente.outrosProjetosParticipantes"
+                                  ng-required="proponente.dirigente.participaOutrosProjetos === true"></textarea>
+                    </div>
+                </div>
+            </div>
+            <h4>Dirigente já teve projeto aprovado em leis de financiamento (municipal, estadual, federal), privados?</h4>
+            <div class="well">
+                <div class="row">
+                    <div class="form-group col-md-12" ng-init="proponente.dirigente.possuiProjetosAprovados = false">
+                        <label class="radio-inline">
+                            <input id="dirigenteLeiFinanciamentoSim" type="radio" ng-model="proponente.dirigente.possuiProjetosAprovados" name="dirigenteLeiFinanciamento" ng-value="true">Sim
+                        </label>
+                        <label class="radio-inline">
+                            <input id="dirigenteLeiFinanciamentoNao" type="radio" ng-model="proponente.dirigente.possuiProjetosAprovados" name="dirigenteLeiFinanciamento" ng-value="false">Não
+                        </label>
+                    </div>
+                </div>
+                <div class="row" ng-show="proponente.dirigente.possuiProjetosAprovados === true">
+                    <div class="form-group col-md-12" show-errors>
+                        <label for="projetosParticipantesDirigente" class="control-label">Projeto(s)</label>
+                        <textarea id="projetosParticipantesDirigente"
+                                  name="projetosParticipantesDirigente"
+                                  class="form-control"
+                                  rows="5"
+                                  ng-model="proponente.dirigente.projetosParticipantes"
+                                  ng-required="proponente.dirigente.possuiProjetosAprovados === true"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

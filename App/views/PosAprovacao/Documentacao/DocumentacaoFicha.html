@@ -1,0 +1,51 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Documentação</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <ng-form name="formPrincipal" novalidate>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Documento</th>
+                                            <th>Arquivo</th>
+                                            <th>Observação</th>
+                                            <th>Aceito</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="documento in documentosParaAprovacao">
+                                            <td>{{documento.nome}}</td>
+                                            <td>
+                                                <file-upload ng-model="documento"
+                                                             extensao="pdf"
+                                                             accept=".pdf, application/pdf"
+                                                             download-fn="downloadDocumento"
+                                                             read-only="true"
+                                                             grid-view="true">
+                                                </file-upload>
+                                            </td>
+                                            <td><textarea rows="2" cols="40" ng-model="documento.observacao" /> </td>
+                                            <td>
+                                                <span class="glyphicon glyphicon-ok" style="cursor:pointer" ng-click="aceite(documento.id, documento.observacao)" ng-style="{'color': documento.avaliado && documento.aceito ? 'green' : 'black'}"></span>  
+                                                <span class="glyphicon glyphicon-remove" style="cursor:pointer" ng-click="recuse(documento.id, documento.observacao)" ng-style="{'color': documento.avaliado && !documento.aceito ? 'red' : 'black'}"></span>
+                                            </td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <a ng-href="#!/aprovacao/" class="btn btn-primary" aria-label="Left Align">Voltar</a>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

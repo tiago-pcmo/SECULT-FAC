@@ -1,0 +1,73 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <label>{{label}}</label>
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th st-sort="nome">Nome</th>
+                        <th st-sort="valor">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.nome}}</td>
+                        <td>{{item.valor}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <div st-pagination st-items-by-page="5"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group" show-errors>
+                            <label for="nomePontuacao" class="control-label">Nome</label>
+                            <input id="nomePontuacao" name="nomePontuacao" type="text" class="form-control" ng-model="item.nome" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="valorPontuacao" class="control-label">Valor</label>
+                            <input id="valorPontuacao" name="valorPontuacao" type="text" class="form-control" ng-model="item.valor" mask="00" required />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

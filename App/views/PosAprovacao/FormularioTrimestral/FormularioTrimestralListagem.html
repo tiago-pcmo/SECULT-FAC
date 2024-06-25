@@ -1,0 +1,69 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <h1>Formulário Trimestral</h1>
+        <hr />
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+
+                        <div class="table-responsive">
+                            <table st-table="listasExibidas" st-safe-src="lista" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <button type="button" class="btn btn-primary btn-xs" ng-click="nova()">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                                            </button>
+                                        </th>
+                                        <th>Titulo</th>
+                                        <th>Ordem</th>
+                                        <th>Download</th>
+                                        <th>Situação</th>
+                                        <th>Observação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="registro in listasExibidas">
+                                        <td class="acoes">
+                                            <div class="row">
+                                                <ul class="list-inline">
+                                                    <li>
+                                                        <a ng-href="#!/formularioTrimestral/{{registro.id}}" uib-tooltip="Editar">
+                                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a ng-click="exclua(registro.id)" uib-tooltip="Excluir" ng-hide="registro.avaliado">
+                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>{{registro.titulo}}</td>
+                                        <td>{{registro.linha}}</td>
+                                        <td>
+                                            <file-upload ng-model="registro" ng-hide="documento.tamanho < 0.0001"
+                                                         extensao="pdf"
+                                                         accept=".pdf, application/pdf"
+                                                         download-fn="downloadDocumento"
+                                                         read-only="true"
+                                                         grid-view="true">
+                                            </file-upload>
+                                        </td>
+                                        <td ng-style="{'color': !registro.avaliado ? 'black' : registro.aceito ? 'green' : 'red'}">{{ !registro.avaliado ? 'Em análise' : registro.aceito ? 'Aceito' : 'Recusado'}}</td>
+                                        <td>{{registro.motivoRecusa}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a ng-href="#!/inscricao/" class="btn btn-primary" aria-label="Left Align">Voltar</a>
+        </div>
+    </div>
+</div>
+
+<!-- ng-hide="registro.tamanho < 1" -->

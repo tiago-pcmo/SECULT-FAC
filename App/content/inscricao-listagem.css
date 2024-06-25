@@ -1,0 +1,11 @@
+﻿.listagem-fichas td.acoes ul.list-inline {
+    width: 230px;
+}
+
+.label-descricao-acao {
+    margin-top: 3px;
+}
+
+.grupo-acao-pos-aprovacao {
+    margin-bottom: 0px !important;
+}

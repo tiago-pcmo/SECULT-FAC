@@ -1,0 +1,91 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th st-sort="descricao">Peça de divulgação / Veículo</th>
+                        <th st-sort="tamanhoDuracao">Tamanho / Duração</th>
+                        <th st-sort="posicaoLogomarcaFraseApoioFca">Posição das logomarcas e da frase de menção ao apoio do Fundo Cultural</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.descricao}}</td>
+                        <td>{{item.tamanhoDuracao}}</td>
+                        <td>{{item.posicaoLogomarcaFraseApoioFca}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <div st-pagination st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" show-errors>
+                            <label for="pecaDivulgacaoVeiculo" class="control-label">Peça de divulgação / Veículo (150 caracteres)</label>
+                            <input id="pecaDivulgacaoVeiculo" name="pecaDivulgacaoVeiculo" type="text" class="form-control" ng-model="item.descricao" placeholder="Ex.: Cartaz"
+                                   maxlength="150"
+                                   required>
+                            <span class="label label-info">{{item.descricao.length || 0}} de 150 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="tamanhoDuracaoDivulgacao" class="control-label">Tamanho / Duração (150 caracteres)</label>
+                            <input id="tamanhoDuracaoDivulgacao" name="tamanhoDuracaoDivulgacao" type="text" class="form-control" ng-model="item.tamanhoDuracao" placeholder="Ex.: A3"
+                                   maxlength="150"
+                                   required />
+                            <span class="label label-info">{{item.tamanhoDuracao.length || 0}} de 150 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-md-8">
+                        <div class="form-group" show-errors>
+                            <label for="posicaoLogomarcaFraseApoioFca" class="control-label">Posição das logomarcas e da frase de menção (100 caracteres)</label>
+                            <input id="posicaoLogomarcaFraseApoioFca" name="posicaoLogomarcaFraseApoioFca" type="text" class="form-control" ng-model="item.posicaoLogomarcaFraseApoioFca" placeholder="Ex.: Canto superior direito"
+                                   maxlength="100"
+                                   required />
+                            <span class="label label-info">{{item.posicaoLogomarcaFraseApoioFca.length || 0}} de 100 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

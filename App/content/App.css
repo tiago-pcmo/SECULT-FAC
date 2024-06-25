@@ -1,0 +1,131 @@
+﻿@media (max-width: 600px) {
+    .logo-rodape {
+        width: 100% !important;
+    }
+}
+
+body {
+    padding-top: 101px;
+    padding-bottom: 20px;
+}
+
+.container-logo-fac {
+    height: 101px !important;
+    padding: 6px 6px 6px 15px !important;
+}
+
+.logo-fac {
+    height: 88px;
+}
+
+.page-header {
+    margin-top: 22px !important;
+}
+
+.table-responsive table[st-table], .validation-errors {
+    background-color: #fff !important;
+}
+
+table[st-table] td.acoes .list-inline {
+    margin-bottom: 0 !important;
+}
+
+table[st-table] th, table[st-table] td {
+    vertical-align: middle !important;
+}
+
+    table[st-table] td.acoes a {
+        cursor: pointer;
+    }
+
+        table[st-table] td.acoes a > .glyphicon.glyphicon-remove {
+            color: #f13c43;
+        }
+
+table[st-table] th {
+    cursor: default;
+}
+
+    table[st-table] th[st-sort] {
+        cursor: pointer;
+    }
+
+table[st-table] .st-sort-ascent:after {
+    content: "\25b2";
+}
+
+table[st-table] .st-sort-descent:after {
+    content: "\25bc";
+}
+
+table[st-table] .pagination {
+    margin: 5px 0 0 0 !important;
+}
+
+table[st-table] thead th, table[st-table] tbody {
+    text-align: center;
+}
+
+.file-upload .progress {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+    height: 4px !important;
+}
+
+.file-upload .panel {
+    margin-bottom: 0 !important;
+}
+
+.file-upload-progress {
+    height: 10px;
+}
+
+.file-upload button {
+    width: 100%;
+}
+
+.file-upload input[type='file'] {
+    display: none;
+}
+
+.file-upload .well {
+    margin-bottom: 0 !important;
+}
+
+.file-upload a.file-download-directive-link {
+    text-decoration: none;
+}
+
+    .file-upload a.file-download-directive-link[disabled] {
+        color: #AAAAAA;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+.logo-rodape {
+    max-width: 493px;
+}
+
+.container-reference-item hr {
+    margin-top: 7px !important;
+    margin-bottom: 7px !important;
+    border-top: 1px solid #e5e5e5 !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.label-check-texto-livre-segmento {
+    margin-left: 22px;
+}
+
+.icone-informacoes-menu-ficha {
+    margin-top: -15px;
+    margin-bottom: -19px;
+    cursor: pointer;
+}
+
+.legenda-acoes-ficha {
+    padding-left: 10px;
+}

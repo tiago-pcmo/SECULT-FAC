@@ -1,0 +1,36 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h4>Planilha orçamentária</h4>
+        <div class="alert alert-info" role="alert">
+            <div class="info-planilha-orcamentaria">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <ul class="list-unstyled">
+                    <li>
+                        <strong>Descrição:</strong> especificar material a serem adquiridos, profissionais e serviços contratados, equipamentos alugados e demais itens necessários.
+                    </li>
+                    <li>
+                        <strong>Quantidade:</strong> quantidade de cada item. Ex.: 2 (Produtores); 1 (Contador); 10 (Aluguel de estúdio para ensaio); 13 (Atores).
+                    </li>
+                    <li>
+                        <strong>Unidade:</strong> unidade de medida de cada item. Ex.: dias, semanas, meses, km, locação, cachê, diária, serviço, passagem, projeto, etc.
+                    </li>
+                    <li>
+                        <strong>Qtd. unidade:</strong> quantidade de unidade de medida dos itens. Ex.: quantos dias, quantos meses, quantas semanas, quantos quilômetros, etc.
+                    </li>
+                    <li>
+                        <strong>Valor unitário:</strong> preço de cada item. Ex.: 1 Produtor = R$ 2.000,00; 1 Elaboração de projeto = R$ 200,00
+                    </li>
+                    <li>
+                        <strong>Total:</strong> valor da multiplicação: ((Quantidade x Quantidade unidade) x (Valor unitário)). Ex.: 2 produtores x 3 meses x R$ 2000 cada por mês = R$ 12.000,00
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <grid-edit ng-model="fichaInscricao.planilhaOrcamentaria"
+                   form="formPlanilhaOrcamentaria"
+                   label="Itens"
+                   options="opcoesPlanilhaOrcamentaria"
+                   template-url="App/views/inscricao/PlanilhaOrcamentaria.html">
+        </grid-edit>
+    </div>
+</div>

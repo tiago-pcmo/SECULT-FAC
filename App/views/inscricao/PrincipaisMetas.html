@@ -1,0 +1,162 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nova
+                            </button>
+                        </th>
+                        <th rowspan="2" st-sort="atividadeProduto">Atividade ou produto</th>
+                        <th rowspan="2" st-sort="quantidade">Quantidade</th>
+                        <th rowspan="2" st-sort="dataInicio">Data / Período</th>
+                        <th colspan="2">Local de realização</th>
+                        <th rowspan="2" st-sort="estimativaPublico">Estimativa de público</th>
+                    </tr>
+                    <tr>
+                        <th st-sort="municipioRealizacao">Município / UF</th>
+                        <th st-sort="espacoCulturalRealizacao">Espaço cultural / Instituição / Logradouro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.atividadeProduto}}</td>
+                        <td>{{item.quantidade | number}}</td>
+                        <td>{{item.dataInicio}} - {{item.dataFim}}</td>
+                        <td>{{item.municipioRealizacao}} - {{item.ufRealizacao}}</td>
+                        <td>{{item.espacoCulturalRealizacao}}</td>
+                        <td>{{item.estimativaPublico | number}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <div st-pagination st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" show-errors>
+                            <label for="atividadeProduto" class="control-label">Atividade ou produto (150 caracteres)</label>
+                            <input id="atividadeProduto" name="atividadeProduto" type="text" class="form-control" ng-model="item.atividadeProduto"
+                                   maxlength="150"
+                                   required>
+                            <span class="label label-info">{{item.atividadeProduto.length || 0}} de 150 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="quantidade" class="control-label">Quantidade</label>
+                            <input id="quantidade" name="quantidade" type="text" class="form-control" ng-model="item.quantidade" mask="000.000.000" mask-number="true" mask-options="{ reverse: true }" required />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="dataInicioMeta" class="control-label">Data início</label>
+                            <input id="dataInicioMeta" name="dataInicioMeta" type="text" class="form-control" ng-model="item.dataInicio" mask="00/00/0000" mask-clean="false" placeholder="Ex.: 14/12/2016" required />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="dataFimMeta" class="control-label">Data fim</label>
+                            <input id="dataFimMeta" name="dataFimMeta" type="text" class="form-control" ng-model="item.dataFim" mask="00/00/0000" mask-clean="false" placeholder="Ex.: 15/12/2016" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-md-9">
+                        <div class="form-group" show-errors>
+                            <label for="municipioRealizacao" class="control-label">Município (100 caracteres)</label>
+                            <input id="municipioRealizacao" name="municipioRealizacao" type="text" class="form-control" ng-model="item.municipioRealizacao"
+                                   maxlength="100"
+                                   required />
+                            <span class="label label-info">{{item.municipioRealizacao.length || 0}} de 100 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="ufRealizacao" class="control-label">UF</label>
+                            <select id="ufRealizacao" name="ufRealizacao" class="form-control" ng-model="item.ufRealizacao" required>
+                                <option value="">Selecione</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PR">PR</option>
+                                <option value="PB">PB</option>
+                                <option value="PA">PA</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SE">SE</option>
+                                <option value="SP">SP</option>
+                                <option value="TO">TO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-md-9">
+                        <div class="form-group" show-errors>
+                            <label for="espacoCulturalRealizacao" class="control-label">Espaço cultural / Instituição / Logradouro (150 caracteres)</label>
+                            <input id="espacoCulturalRealizacao" name="espacoCulturalRealizacao" type="text" class="form-control" ng-model="item.espacoCulturalRealizacao"
+                                   maxlength="150"
+                                   required />
+                            <span class="label label-info">{{item.espacoCulturalRealizacao.length || 0}} de 150 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="estimativaPublico" class="control-label">Estimativa de público</label>
+                            <input id="estimativaPublico" name="estimativaPublico" type="text" class="form-control" ng-model="item.estimativaPublico" mask="000.000.000" mask-number="true" mask-options="{ reverse: true }" required />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

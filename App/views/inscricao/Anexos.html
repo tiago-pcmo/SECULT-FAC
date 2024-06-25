@@ -1,0 +1,41 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h4>PDF</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Neste campo você <strong><u>SÓ PODERÁ ANEXAR UM ÚNICO ARQUIVO PDF</u></strong>, constando <strong>TODOS OS DOCUMENTOS SOLICITADOS NO <u>ANEXO I</u> DE CADA EDITAL E, SE FOR O CASO, A <u>PLANILHA ORÇAMENTÁRIA DE OUTRAS FONTES DE RECURSO</u></strong>.
+            <div>
+                <strong>ESTE ÚNICO ARQUIVO DEVERÁ TER O TAMANHO MÁXIMO DE <u>20MB.</u></strong>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-6 col-lg-5">
+                    <file-upload ng-model="fichaInscricao.anexo"
+                                 label="Arquivo PDF com os anexos da ficha de inscrição"
+                                 nome="Arquivo com os anexos - ficha de inscrição"
+                                 extensao="pdf"
+                                 accept=".pdf, application/pdf"
+                                 download-fn="getArquivoAnexoFichaInscricao"
+                                 read-only="!acoes.editar">
+                    </file-upload>
+                </div>
+            </div>
+        </div>
+        <h4>Links</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Neste campo você poderá inserir quantos links forem necessários para encaminhar vídeos, músicas, fotos, <strong>inclusive arquivos PDF e os documentos solicitados no <u>ANEXO I</u> de cada edital</strong>.
+            <div>
+                <strong>Google Drive, Dropbox, OneDrive, Box, dentre outros,</strong> são exemplos de ferramentas para disponibilizar arquivos na nuvem (online).
+            </div>
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-12">
+                    <grid-edit ng-model="fichaInscricao.links" form="formLinksAnexos" template-url="App/views/inscricao/AnexosLinks.html"></grid-edit>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

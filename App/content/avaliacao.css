@@ -1,0 +1,31 @@
+﻿@media (max-width: 992px) {
+    .pontuacao-avaliacao > li {
+        display: block !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .info-classificacao {
+        float: left !important;
+    }
+}
+
+.ficha-classificada {
+    color: green;
+}
+
+.ficha-desclassificada {
+    color: red;
+}
+
+.icone-visualizar-ficha {
+    font-size: 24px;
+}
+
+.avaliacao .visualizar-ficha {
+    text-decoration: none !important;
+}
+
+.gera-pdf {
+    cursor: pointer;
+}

@@ -1,0 +1,33 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Natureza - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <form name="formPrincipal" ng-submit="submit(formPrincipal)" novalidate>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <label for="descricao" class="control-label">Descrição</label>
+                                    <input id="descricao" name="descricao" type="text" class="form-control" ng-model="natureza.descricao"
+                                           maxlength="100" required>
+                                    <span class="label label-info">{{natureza.descricao.length || 0}} de 100 caracteres</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="label-check-texto-livre-segmento checkbox"><input type="checkbox" ng-model="natureza.formacao"> Formação</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancele()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

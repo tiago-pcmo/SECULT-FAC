@@ -1,0 +1,70 @@
+﻿<div class="row habilitacao" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Habilitação - {{acao}}</h1>
+                    <div class="icone-visualizar-ficha">
+                        <a href="#!/inscricao/{{idFicha}}" target="_blank" class="visualizar-ficha" ng-show="(fichaFaseHabilitacao || fichaFaseRespostaRecursoHabilitacao) && !usuarioProponente">
+                            <spam class="glyphicon glyphicon-file"></spam>
+                            Visualizar inscrição
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <img class="gera-pdf" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAWCAYAAACG9x+sAAACxUlEQVRYR+WWy2tTQRTGv3MSE2xVUMFC22Tm3qS1oLgTBXei6Eq6kC4UX7gT6cKKIKJQ6Kai+MaFpQtb0D/AhYiPurIuRFDooiS9vbXVpQ+s2jZ3jty0V9OY1iYYY3B2M3fmnO835zGXNtXV1X6JLL/qsbQxaAWqYAgwCdDdbzNT7ZRUuleAI1Wgu4BEuUW20p8JqK1KAGM+UkJpqUrxs6K9/wvAeHhJIZn+ETGhqIixmXlVsGYg4wRMBHMCh2G8RjDX5UdaIM8Xij6BNgPg32RHcRGgTDiWmkiN5xllW6ndZOgGGBqgs2nX6cp3nIglNhK808LYF3yLuXrZAAYyhUQusTb/CEDWv91oN0nIG2JwZyGAQGQirk+B0O3PKwZgx/U5EnPMEKaZQn1p1znjC0ooNQDwQx/Asqz1nPGeCnOGICkAnWnXfZLdF9PPwNgaANjKuk7G2zsvEszrAFBZUigRsy6ApcM3boyZdt6MRecAbgM87AP4KQP2XucI+BryMk3D4+MTCWUdB+RaAJBUVr9A9pfQDUtLoVwAAYZG3NENswDWPQCDCwCAhA6mxpw+K27tZJIHAUBCqe1C1JwLIJ65zMzZi1lklAigdasI7SCY94a5x3Ect6WhYe1UODzK4O5FAA6kxpz+pNa7RHC/YjWQfyO2bTeTJ72AbAu60KIpFNftIFzJicB5iOyZZ5fYj0iZakDrw8aYVhBHQx60hNDy0/lsG/WLmIw8Is9khHmESLrSrvs427GUGiTQln+iBn7Nz8LvQLAvqdQJAV3MbaMVLeKlAmRTimZOgvhQ/kP21wAAeQXwzEK/BnPC3gL07gcYSQSCRgCrC8C+8NcIYgmwpuxttAQH5T5SXBstt5oS7GcBJgHUlHC48kcMPpCtrB6CHK28muIVEHCT6uvra6KRyCX20AbGyuLNVOTEJwHdMSQd3wFI4oVXlf8xcAAAAABJRU5ErkJggg==" alt="Gerar PDF" ng-click="getHabilitacaoPDF()" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <form name="formPrincipal" ng-submit="submit(formPrincipal)" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="radio-inline">
+                                        <input id="radioHabilitacaoHabilitado" name="radioHabilitacaoHabilitado" type="radio" ng-model="habilitacao.habilitacao.habilitado" ng-value="true" ng-disabled="((usuarioProponente) || (fichaFaseRecursoHabilitacao))">Habilitado
+                                    </label>
+
+                                    <label class="radio-inline">
+                                        <input id="radioHabilitacaoHabilitado" name="radioHabilitacaoHabilitado" type="radio" ng-model="habilitacao.habilitacao.habilitado" ng-value="false" ng-disabled="((usuarioProponente) || (fichaFaseRecursoHabilitacao))">Inabilitado
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <label for="motivo" class="control-label">Motivo</label>
+                                    <textarea id="motivo" name="motivo" class="form-control" rows="4" ng-model="habilitacao.habilitacao.motivoInabilitacao" ng-disabled="!fichaFaseHabilitacao || !permiteManutencao"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="fichaFaseRecursoHabilitacao || fichaFaseRespostaRecursoHabilitacao">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <label for="recurso" class="control-label">Recurso</label>
+                                    <textarea id="recurso" name="recurso" class="form-control" rows="4" ng-model="habilitacao.habilitacao.recurso" ng-disabled="!fichaFaseRecursoHabilitacao || !permiteManutencao"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="fichaFaseRespostaRecursoHabilitacao">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <label for="respostaRecurso" class="control-label">Resposta do recurso</label>
+                                    <textarea id="respostaRecurso" name="respostaRecurso" class="form-control" rows="4" ng-disabled="desabilitarRespostaRecurso"
+                                              ng-model="habilitacao.habilitacao.respostaRecurso"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-show="permiteManutencao">Salvar</button>
+                        <button type="button" class="btn btn-primary" ng-show="permiteManutencao" ng-click="cancele()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

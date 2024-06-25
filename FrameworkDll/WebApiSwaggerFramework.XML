@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FrameworkWebApi</name>
+    </assembly>
+    <members>
+        <member name="M:FrameworkWebApi.Controllers.AccountController.Login(FrameworkWebApi.Models.LoginModel)">
+            <summary>
+            Processa o login e obtém a autorização para o acesso.
+            </summary>
+            <param name="loginModel">Model com os dados do login.</param>
+            <returns>Uma instância de <see cref="T:FrameworkWebApi.Models.TokenModel"/>.</returns>
+        </member>
+        <member name="M:FrameworkWebApi.Controllers.AccountController.RedefinePassword(FrameworkWebApi.Models.RedefinePasswordModel)">
+            <summary>
+            Redefine a senha do usuário.
+            </summary>
+            <param name="redefinePasswordModel">Model com os dados do usuário para redefinição de senha.</param>
+        </member>
+        <member name="T:FrameworkWebApi.Models.ResponseExceptionModel">
+            <summary>
+            Model de response exception.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.ResponseExceptionModel.Message">
+            <summary>
+            Mensagem da exceção.
+            </summary>
+        </member>
+        <member name="T:FrameworkWebApi.Models.TokenModel">
+            <summary>
+            Model do token de autorização.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.TokenModel.Access_token">
+            <summary>
+            Token de acesso.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.TokenModel.Token_type">
+            <summary>
+            Tipo do token.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.TokenModel.Expires_in">
+            <summary>
+            Informação de quando o token expira.
+            </summary>
+        </member>
+        <member name="T:FrameworkWebApi.Models.LoginModel">
+            <summary>
+            Model de login.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.LoginModel.UserName">
+            <summary>
+            Usuário.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.LoginModel.Password">
+            <summary>
+            Senha.
+            </summary>
+        </member>
+        <member name="T:FrameworkWebApi.Models.RedefinePasswordModel">
+            <summary>
+            Model para redefinição de senha.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.RedefinePasswordModel.UserName">
+            <summary>
+            Usuário.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.RedefinePasswordModel.NewPassword">
+            <summary>
+            Nova senha.
+            </summary>
+        </member>
+        <member name="P:FrameworkWebApi.Models.RedefinePasswordModel.Identification">
+            <summary>
+            Identificação.
+            </summary>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.IsPrimitiveType(System.Type)">
+            <summary>
+            Método responsável por verificar se o <see cref="T:System.Type"/> é primitivo.
+            </summary>
+            <param name="type">O <see cref="T:System.Type"/> a ser verificado.</param>
+            <returns>
+            <c>true</c> caso o <see cref="T:System.Type"/> seja primitivo e <c>false</c>, caso contrário.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.IsEnumerable(System.Type)">
+            <summary>
+            Método responsável por verificar se o <see cref="T:System.Type"/> é um <see cref="T:System.Collections.IEnumerable"/>.
+            </summary>
+            <param name="type">O <see cref="T:System.Type"/> a ser verificado.</param>
+            <returns>
+            <c>true</c> caso o <see cref="T:System.Type"/> seja um <see cref="T:System.Collections.IEnumerable"/> e <c>false</c>, caso contrário.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.IsNullable(System.Type)">
+            <summary>
+            Método responsável por verificar se o <see cref="T:System.Type"/> é um <see cref="T:System.Collections.IEnumerable"/>.
+            </summary>
+            <param name="type">O <see cref="T:System.Type"/> a ser verificado.</param>
+            <returns>
+            <c>true</c> caso o <see cref="T:System.Type"/> seja um <see cref="T:System.Collections.IEnumerable"/> e <c>false</c>, caso contrário.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.GetDataTable(System.Data.DataSet,System.String)">
+            <summary>
+            Obtém um <see cref="T:System.Data.DataTable"/> em um <see cref="T:System.Data.DataSet"/> baseado no nome da tabela.
+            </summary>
+            <param name="dataSet">A instância do <see cref="T:System.Data.DataSet"/>.</param>
+            <param name="tableName">O nome da tabela.</param>
+            <returns>
+            A instância do <see cref="T:System.Data.DataTable"/> referente ao nome da tabela.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetString(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter uma <c>string</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            A <c>string</c> obtida.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetInt32(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter um <c>int</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            O <c>int</c> obtido.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetInt32Nullable(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter um <c>int?</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            O <c>int?</c> obtido.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetInt64(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter um <c>long</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            O <c>long</c> obtido.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetInt64Nullable(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter um <c>long?</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            O <c>long?</c> obtido.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetDecimal(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter um <c>decimal</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            A <c>decimal</c> obtido.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.ExtensionMethods.SafeGetDecimalNullable(System.Data.Common.DbDataReader,System.Int32)">
+            <summary>
+            Método responsável por obter um <c>decimal?</c> da coluna de um <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader">O data reader.</param>
+            <param name="colIndex">O índice da coluna do data reader.</param>
+            <returns>
+            A <c>decimal?</c> obtido.
+            </returns>
+        </member>
+        <member name="T:FrameworkWebApi.Utilities.TransformerFactory.Transformer">
+            <summary>
+            Classe responsável pelas transformações de <see cref="T:System.Data.DataTable"/> em <c>TransferObject</c>.
+            </summary>
+            <remarks>
+            OBS. IMPORTANTE: muito cuidado em alterar o código dessa classe que, por se tratar de um código genérico para
+            atender 'N' cenários, já possui por si só uma complexidade alta, envolvendo inclusive casos de recursividade implícita.
+            Portanto, só altere o código depois de entender fielmente a lógica envolvida.
+            </remarks>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.Transform``1(System.Data.DataTable)">
+             <summary>
+             Método responsável por transformar uma instância de <see cref="T:System.Data.DataTable"/> em uma lista de <c>TranferObject</c> do type informado.
+             </summary>
+             <typeparam name="T">O tipo do <c>TransferObject</c> desejado.</typeparam>
+             <param name="dataTable">Uma instância de <see cref="T:System.Data.DataTable"/> com os dados a serem transformados.</param>
+             <remarks>
+             Cada type do C# corresponde a um type que deve estar na instância do <see cref="T:System.Data.DataTable"/>:
+            
+             |------------------|----------------------|
+             |    DataTable     |          C#          |
+             |------------------|----------------------|
+             |  Número         -->   Número            |
+             |  String         -->   String            |
+             |  Número         -->   Enum              |
+             |  String         -->   Date (String)     |
+             |------------------|----------------------|
+            
+             </remarks>
+             <returns>
+             A lista de <c>TransferObjetc</c> transformada com os dados da instância do <see cref="T:System.Data.DataTable"/>.
+             </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.Transform(System.Type,System.Collections.Generic.IEnumerable{System.Data.DataRow})">
+            <summary>
+            Método responsável por transformar uma instância de <see cref="T:System.Collections.IEnumerable"/> de <see cref="T:System.Data.DataRow"/> em uma lista de <c>TranferObject</c> do type informado.
+            </summary>
+            <param name="type">O <see cref="T:System.Type"/> do <c>TransferObject</c> transformado.</param>
+            <param name="dataTable">O <see cref="T:System.Collections.IEnumerable"/> de <see cref="T:System.Data.DataRow"/> a ser transformado.</param>
+            <returns>
+            A lista de <c>TransferObjetc</c> transformada com os dados da instância do <see cref="T:System.Collections.IEnumerable"/> de <see cref="T:System.Data.DataRow"/>.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.TransfomRow(System.Type,System.Collections.Generic.IEnumerable{System.Data.DataRow},System.Data.DataRow)">
+            <summary>
+            Método responsável por transformar uma instância de <see cref="T:System.Data.DataRow"/> no <c>TranferObject</c> do type informado.
+            </summary>
+            <param name="type">O tipo do <c>TransferObject</c> desejado.</param>
+            <param name="dataTable">O <see cref="T:System.Collections.IEnumerable"/> de <see cref="T:System.Data.DataRow"/> a ser transformado.</param>
+            <param name="row">A linha do <see cref="T:System.Data.DataTable"/> a ser tranformada.</param>
+            <returns>
+            O <c>TransferObject</c> transformado com os dados da intância de <see cref="T:System.Data.DataRow"/>.
+            </returns>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.SetValuePrimitive``1(System.Data.DataRow,FrameworkWebApi.Utilities.TransformerFactory.TransformerPropertyAttribute,System.Reflection.PropertyInfo,``0)">
+            <summary>
+            Seta o valor de uma instância de <see cref="T:System.Reflection.PropertyInfo"/> do <see cref="T:System.Type"/> primitivo.
+            </summary>
+            <typeparam name="T">O type do <c>TransferObject</c>.</typeparam>
+            <param name="row">A linha do <see cref="T:System.Data.DataTable"/> a ser tranformada.</param>
+            <param name="transformerPropertyAttr">O atributo com os dados da transformação.</param>
+            <param name="property">A instância de <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+            <param name="transferObject">O <c>TransferObject</c> que receberá o valor.</param>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.SetValueEnumerable(System.Type,System.Collections.Generic.IEnumerable{System.Data.DataRow},System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            Seta o valor de uma instância de <see cref="T:System.Reflection.PropertyInfo"/> do <see cref="T:System.Type"/> enumerable.
+            </summary>
+            <param name="type">O tipo do <c>TransferObject</c> desejado.</param>
+            <param name="dataTable">O <see cref="T:System.Collections.IEnumerable"/> de <see cref="T:System.Data.DataRow"/> a ser transformado.</param>
+            <param name="property">A instância de <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+            <param name="transferObject">O <c>TransferObject</c> que receberá o valor.</param>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.SetValueObject``1(System.Collections.Generic.IEnumerable{System.Data.DataRow},System.Data.DataRow,System.Reflection.PropertyInfo,``0)">
+            <summary>
+            Seta o valor de uma instância de <see cref="T:System.Reflection.PropertyInfo"/> do <see cref="T:System.Type"/> object (não primitivo).
+            </summary>
+            <typeparam name="T">O type do <c>TransferObject</c>.</typeparam>
+            <param name="dataTable">O <see cref="T:System.Collections.IEnumerable"/> de <see cref="T:System.Data.DataRow"/> a ser tranformado.</param>
+            <param name="row">A linha do <see cref="T:System.Data.DataTable"/> a ser tranformada.</param>
+            <param name="property">A instância de <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+            <param name="transferObject">O <c>TransferObject</c> que receberá o valor.</param>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.SetValue``1(System.Reflection.PropertyInfo,``0,System.Object)">
+            <summary>
+            Seta o valor de uma instância de <see cref="T:System.Reflection.PropertyInfo"/>.
+            </summary>
+            <typeparam name="T">O type do <c>TransferObject</c>.</typeparam>
+            <param name="property">A instância de <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+            <param name="transferObject">O <c>TransferObject</c> que receberá o valor.</param>
+            <param name="value">O valor da <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.SetValue``1(System.Reflection.PropertyInfo,System.Type,``0,System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Seta o valor de uma instância de <see cref="T:System.Reflection.PropertyInfo"/> que seja um <see cref="T:System.Collections.IEnumerable"/>.
+            </summary>
+            <typeparam name="T">O type do <c>TransferObject</c>.</typeparam>
+            <param name="property">A instância de <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+            <param name="genericType">O type do generics do tipo da propriedade <see cref="T:System.Collections.IEnumerable"/>.</param>
+            <param name="transferObject">O <c>TransferObject</c> que receberá o valor.</param>
+            <param name="value">O valor da <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+        </member>
+        <member name="M:FrameworkWebApi.Utilities.TransformerFactory.Transformer.ThrowSetValueException``1(System.Reflection.PropertyInfo,``0,System.String)">
+            <summary>
+            Método responsável por disparar uma exceção caso não seja possível setar o valor em uma propriedade.
+            </summary>
+            <typeparam name="T">O <see cref="T:System.Type"/> do <c>TransferObject</c>.</typeparam>
+            <param name="property">A instância de <see cref="T:System.Reflection.PropertyInfo"/>.</param>
+            <param name="transferObject">O <c>TransferObject</c> que receberia o valor.</param>
+            <param name="exceptionMessage">A mensagem original da exceção.</param>
+        </member>
+    </members>
+</doc>

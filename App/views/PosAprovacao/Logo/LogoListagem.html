@@ -1,0 +1,65 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <h1>Logo para Fichas aprovadas</h1>
+        <hr />
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+
+                        <div class="table-responsive">
+                            <table st-table="documentosExibidos" st-safe-src="documentosListagem" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <button type="button" class="btn btn-primary btn-xs" ng-click="nova()">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                                            </button>
+                                        </th>                                        
+                                        <th>Título</th>
+                                        <th>Download</th>
+                                        <th>Situação</th>
+                                        <th>Observação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="documento in documentosExibidos">
+                                        <td class="acoes">
+                                            <div class="row">
+                                                <ul class="list-inline">
+                                                    <li>
+                                                        <a ng-href="#!/logo/{{documento.id}}" uib-tooltip="Editar">
+                                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a ng-click="exclua(documento.id)" uib-tooltip="Excluir" ng-hide="documento.avaliado">
+                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>    
+                                        <td>{{documento.titulo}}</td>                                    
+                                        <td>
+                                            <file-upload ng-model="documento"
+                                                         extensao="pdf"
+                                                         accept=".pdf, application/pdf"
+                                                         download-fn="downloadDocumento"
+                                                         read-only="true"
+                                                         grid-view="true">
+                                            </file-upload>
+                                        </td>
+                                        <td ng-style="{'color': !documento.avaliado ? 'black' : documento.aceito ? 'green' : 'red'}">{{ !documento.avaliado ? 'Em análise' : documento.aceito ? 'Aceito' : 'Recusado'}}</td>
+                                        <td>{{documento.motivoRecusa}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a ng-href="#!/inscricao/" class="btn btn-primary" aria-label="Left Align">Voltar</a>
+        </div>
+    </div>
+</div>

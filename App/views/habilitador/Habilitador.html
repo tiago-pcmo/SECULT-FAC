@@ -1,0 +1,59 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Habilitador</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <div class="table-responsive">
+                        <table st-table="habilitadoresExibidos" st-safe-src="habilitadores" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn btn-primary btn-xs" ng-click="novo()">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                                        </button>
+                                    </th>
+                                    <th st-sort="nomeCompleto">Nome completo</th>
+                                    <th st-sort="cpf">CPF</th>
+                                    <th st-sort="email">E-Mail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="habilitador in habilitadoresExibidos">
+                                    <td class="acoes">
+                                        <div class="row">
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a ng-href="#!/habilitador/{{habilitador.id}}" ui uib-tooltip="Editar">
+                                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ng-href="#!/habilitador" ng-click="exclua(habilitador.id)" uib-tooltip="Excluir">
+                                                        <spam class="glyphicon glyphicon-remove" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="text-left">{{habilitador.nomeCompleto}}</td>
+                                    <td>{{habilitador.cpf}}</td>
+                                    <td class="text-left">{{habilitador.email}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div st-pagination st-items-by-page="10"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

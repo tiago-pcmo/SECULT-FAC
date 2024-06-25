@@ -1,0 +1,63 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Parecerista</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <div class="table-responsive">
+                        <table st-table="pareceristasExibidos" st-safe-src="pareceristas" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn btn-primary btn-xs" ng-click="novo()">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> novo
+                                        </button>
+                                    </th>
+                                    <th st-sort="nomeCompleto">Nome completo</th>
+                                    <th st-sort="dataNascimento">Data de nascimento</th>
+                                    <th st-sort="cpf">CPF</th>
+                                    <th st-sort="email">E-mail</th>
+                                    <th st-sort="telefone">Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="parecerista in pareceristasExibidos">
+                                    <td class="acoes">
+                                        <div class="row">
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a ng-href="#!/parecerista/{{parecerista.id}}" ui uib-tooltip="Editar">
+                                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ng-click="exclua(parecerista.id)" uib-tooltip="Excluir">
+                                                        <spam class="glyphicon glyphicon-remove" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="text-left">{{parecerista.nomeCompleto}}</td>
+                                    <td>{{parecerista.dataDeNascimento | date:"dd/MM/yyyy"}}</td>
+                                    <td>{{parecerista.cpf}}</td>
+                                    <td class="text-left">{{parecerista.email}}</td>
+                                    <td>{{parecerista.telefone}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div st-pagination st-items-by-page="10"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h4>Principais metas a atingir</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Quantificar as ações, atividades ou produtos propostos, além de indicar informações sobre data e local de realização e público estimado.
+        </div>
+        <div class="well">
+            <grid-edit ng-model="fichaInscricao.principaisMetasProjeto" form="formPrincipaisMetas" template-url="App/views/inscricao/PrincipaisMetas.html"></grid-edit>
+        </div>
+        <h4>Informações adicionais sobre público (sem limite de caracteres)</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Informe, por exemplo, faixa etária, renda e características que considere importantes para entender a proposta.
+        </div>
+        <div class="well">
+            <div class="form-group">
+                <textarea id="infoAdicionaisPublico" name="infoAdicionaisPublico" class="form-control" rows="6" ng-model="fichaInscricao.informacoesAdicionaisPublico"></textarea>
+            </div>
+        </div>
+        <h4>Descrição das atividades e estratégias de ação</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Descrever os passos a serem seguidos, permitindo a clara compreensão de como será realizada a proposta.
+            Identificar os profissionais, serviços e materiais necessários para cada etapa, de acordo <u>com o orçamento</u>.
+            Início e fim deverão informar as datas em que acontecerão cada etapa do projeto.
+        </div>
+        <div class="well">
+            <grid-edit ng-model="fichaInscricao.atividadesEstrategiasDeAcao"
+                       form="formAtividadesEstrategiasDeAcao"
+                       options="opcoesAtividadesEstrategiasDeAcao"
+                       template-url="App/views/inscricao/AtividadesEstrategiasDeAcao.html"></grid-edit>
+        </div>
+        <h4>Plano de gerenciamento da proposta cultural (sem limite de caracteres)</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Estratégias de distribuição e comercialização (locais e ferramentas de divulgação) do bem cultural realizado com apoio do Fundo de Cultura, inclusive cobrança de ingresso, vagas em cursos e oficinas (se houver).
+            Desdobramentos e gerenciamento da proposta e os possíveis ganhos da área cultural e dos envolvidos no projeto.
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea id="planoGerenciamento" name="planoGerenciamento" class="form-control" rows="6" ng-model="fichaInscricao.planoGerenciamento"></textarea>
+                </div>
+            </div>
+        </div>
+        <h4>Quadro resumo de distribuição / comercialização de produtos culturais</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Plano de distribuição de produtos culturais de forma a estimar a arrecadação, afim de permitir a avaliação no relartório de execução. No caso de distribuição gratuita, informar no campo acima o público beneficiado.
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-12">
+                    <grid-edit ng-model="fichaInscricao.quadroResumoDistribuicaoComercializacao"
+                               form="formQuadroResumoDistribuicao"
+                               options="opcoesQuadroResumo"
+                               template-url="App/views/inscricao/QuadroResumoDistribuicao.html">
+                    </grid-edit>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="pontoVendaDistribuicao" class="control-label">Locais de venda ou distribuição dos produtos culturais produzidos (sem limite de caracteres)</label>
+                        <textarea id="pontoVendaDistribuicao" name="pontoVendaDistribuicao" class="form-control" ng-model="fichaInscricao.localVendaDistribuicaoProdutosProduzidos" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Estimativa de receita</h4>
+                    <div class="table-responsive">
+                        <table st-table="listaExibida" st-safe-src="fichaInscricao.quadroResumoDistribuicaoComercializacao" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nome do evento / Produto</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in listaExibida">
+                                    <td class="text-left">{{item.descricao}}</td>
+                                    <td>{{+item.receitaEstimadaVendaNormal + +item.receitaEstimadaVendaMeia | currency:"R$ "}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="10">
+                                        <div st-pagination st-items-by-page="10"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="totalGeralEstimativaReceita" class="control-label">Total (R$)</label>
+                        <input type="text"
+                               id="totalGeralEstimativaReceita"
+                               name="totalGeralEstimativaReceita"
+                               class="form-control text-right"
+                               disabled ng-model="opcoesQuadroResumoVisualizacao.totalEstimativaReceita"
+                               mask="#.##0,00"
+                               mask-number="true"
+                               mask-options="{ reverse: true }" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

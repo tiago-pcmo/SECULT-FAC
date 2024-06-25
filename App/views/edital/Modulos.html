@@ -1,0 +1,81 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <label>{{label}}</label>
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th st-sort="descricao">Descrição</th>
+                        <th st-sort="qtdDeProjetosAprovados">Qtd. proj. aprov. por modalidade</th>
+                        <th st-sort="valor">Valor do prêmio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.descricao}}</td>
+                        <td>{{item.qtdDeProjetosAprovados}}</td>
+                        <td>{{item.valor | currency:"R$ "}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <div st-pagination st-items-by-page="4"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" show-errors>
+                            <label for="descricaoModulo" class="control-label">Descrição</label>
+                            <input id="descricaoModulo" name="descricaoModulo" type="text" class="form-control" ng-model="item.descricao" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="qtdDeProjetosAprovadosModulo" class="control-label">Qtd. proj. aprov. por modalidade</label>
+                            <input id="qtdDeProjetosAprovadosModulo" name="qtdDeProjetosAprovadosModulo" type="text" class="form-control" ng-model="item.qtdDeProjetosAprovados" mask="000" required />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="valorModulo" class="control-label">Valor do prêmio (R$)</label>
+                            <input id="valorModulo" name="valorModulo" type="text" class="form-control" ng-model="item.valor" mask="#.##0,00" mask-number="true" mask-options="{ reverse: true }" required />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

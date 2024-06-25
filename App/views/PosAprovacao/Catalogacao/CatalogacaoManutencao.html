@@ -1,0 +1,76 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Catalogação de produtos culturais - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <ng-form name="formPrincipal" novalidate>
+                        <div class="text-center"><strong class="text-center">Vincular a:</strong></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2"></th>
+                                            
+                                            <th>Ficha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="fichaDisponivel in fichasParaVinculo">
+                                            <td><input name="radioFicha" type="radio" ng-value="true" 
+                                                       ng-change="handleRadioClick(fichaDisponivel)"
+                                                       ng-model="fichaDisponivel.marcado"/></td>
+                                            <td>{{fichaDisponivel.titulo}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <label for="titulo" class="control-label">Título: (200 caracteres)</label>
+                                    <input id="titulo" name="titulo" type="text" class="form-control" ng-model="documento.titulo"
+                                           maxlength="200"
+                                           required />
+                                    <span class="label label-info">{{documento.titulo.length || 0}} de 200 caracteres</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--<div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tipoDocumento" class="control-label">Tipo</label>
+                                    <select id="tipoDocumento"
+                                            name="tipoDocumento"
+                                            class="form-control"   
+                                            ng-disabled="documento.aceito"                                         
+                                            ng-model="documento.tipo"
+                                            ng-options="tipo as tipo.descricao for tipo in tiposDocumentos track by tipo.descricao" required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>-->
+                            <div class="col-md-12">
+                                <file-upload ng-model="documento"
+                                             extensao="pdf"
+                                             accept=".pdf, application/pdf"
+                                             label="Documento"
+                                             download-fn="downloadDocumento"                                             
+                                             read-only="documento.aceito"
+                                             background="true">
+                                </file-upload>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" ng-click="salve()" ng-hide="documento.aceito">Salvar</button>
+                        <a ng-href="#!/catalogacao/" class="btn btn-primary" aria-label="Left Align">Voltar</a>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

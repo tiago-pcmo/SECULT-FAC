@@ -1,0 +1,74 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Habilitador - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="well">
+                    <form name="formPrincipal" ng-submit="submit(formPrincipal)" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="nomeCompleto" class="control-label">Nome completo</label>
+                                    <input id="nomeCompleto" name="nomeCompleto" type="text" class="form-control" ng-model="habilitador.nomeCompleto" required />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group" show-errors>
+                                    <label for="cpf" class="control-label">CPF</label>
+                                    <input id="cpf" name="cpf" type="text" class="form-control" ng-model="habilitador.cpf" mask="000.000.000-00" mask-validate="false" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="email" class="control-label">E-Mail</label>
+                                    <input id="email" name="email" type="text" class="form-control" ng-model="habilitador.email" ng-pattern="/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group" ng-init="habilitador.status='ACTIVE'">
+                                    <label for="Situacao" class="control-label">Situação</label>
+                                    <div>
+                                        <label class="radio-inline">
+                                            <input type="radio" id="statusAtivo" name="status" ng-value="'ACTIVE'" ng-model="habilitador.status" />Ativo
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" id="statusInativo" name="status" ng-value="'INACTIVE'" ng-model="habilitador.status" />Inativo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="Usuario" class="control-label">Usuário</label>
+                                    <input id="usuario" name="usuario" type="text" class="form-control" ng-model="habilitador.usuario" required ng-disabled="modoEdicao" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="Senha" class="control-label" ng-show="!modoEdicao">Senha</label>
+                                    <input id="senha" name="senha" type="password" class="form-control" ng-model="habilitador.Senha" ng-show="!modoEdicao" ng-required="!modoEdicao" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="confirmarSenha" class="control-label" ng-show="!modoEdicao">Confirmar senha</label>
+                                    <input id="confirmarSenha" name="confirmarSenha" type="password" class="form-control" ng-model="habilitador.confirmSenha" field-match="senha" ng-show="!modoEdicao" ng-required="!modoEdicao" />
+                                    <span class="help-block" ng-show="formPrincipal.confirmarSenha.$error.fieldmatch">Senha e confirmação de senha não conferem.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancele()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

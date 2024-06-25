@@ -1,0 +1,28 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div id="inconsistencias" class="alert alert-danger alert-dismissible" role="alert" ng-show="errosDeValidacao">
+            <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <div>
+                <h4>Lista de inconsistências:</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="validation-errors table table-hover table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <!--<th class="text-center">Campo</th>-->
+                            <th class="text-center">Mensagem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="erro in errosDeValidacao">
+                            <th class="text-center">{{$index + 1}}</th>
+                            <!--<td class="text-center">{{erro.property}}</td>-->
+                            <td>{{erro.message}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

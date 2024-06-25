@@ -1,0 +1,113 @@
+﻿<h4>Proponente do projeto</h4>
+<div class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+    Dados do proponente do projeto.
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12">
+            <label class="control-label">Tipo</label>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input id="tipoProponenteProjetoPj" type="radio" ng-model="fichaInscricao.proponente.tipo" name="tipoProponenteProjeto" value="JURIDICA" disabled>Pessoa jurídica
+                </label>
+                <label class="radio-inline">
+                    <input id="tipoProponenteProjetoPf" type="radio" ng-model="fichaInscricao.proponente.tipo" name="tipoProponenteProjeto" value="FISICA" disabled>Pessoa física
+                </label>
+            </div>
+            <div class="form-group" show-errors>
+                <label for="nomeProponenteProjeto" class="control-label" ng-show="fichaInscricao.proponente.tipo === 'FISICA'">Nome</label>
+                <label for="nomeProponenteProjeto" class="control-label" ng-hide="fichaInscricao.proponente.tipo === 'FISICA'">Instituição/razão social</label>
+                <input id="nomeProponenteProjeto" name="nomeProponenteProjeto" type="text" class="form-control" ng-model="fichaInscricao.proponente.nome" disabled />
+            </div>
+            <div ng-show="fichaInscricao.proponente.tipo === 'FISICA'">
+                <label class="control-label">Proponente é funcionário público do estado de Goiás?</label>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoFuncionarioPublicoSim" type="radio" ng-model="fichaInscricao.proponente.funcionarioPublico" name="proponenteProjetoFuncionarioPublico" ng-value="true" disabled>Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoFuncionarioPublicoNao" type="radio" ng-model="fichaInscricao.proponente.funcionarioPublico" name="proponenteProjetoFuncionarioPublico" ng-value="false" disabled>Não
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-5">
+                        <file-upload ng-model="fichaInscricao.proponente.declaracao"
+                                     label="Declaração de não funcionário público (arquivo PDF)"
+                                     nome="Declaração proponente não func. público"
+                                     extensao="pdf"
+                                     accept=".pdf, application/pdf"
+                                     download-fn="getDeclaracaoProponente"
+                                     ng-show="fichaInscricao.proponente.funcionarioPublico === false"
+                                     read-only="true">
+                        </file-upload>
+                    </div>
+                </div>
+                <label class="control-label">Proponente participa de outro projeto inscrito?</label>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoParticipaOutrosProjetosSim" type="radio" ng-model="fichaInscricao.proponente.participaOutrosProjetos" name="proponenteProjetoParticipaOutrosProjetos" ng-value="true" disabled>Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoParticipaOutrosProjetosNao" type="radio" ng-model="fichaInscricao.proponente.participaOutrosProjetos" name="proponenteProjetoParticipaOutrosProjetos" ng-value="false" disabled>Não
+                    </label>
+                </div>
+                <div ng-show="fichaInscricao.proponente.participaOutrosProjetos === true">
+                    <div class="form-group">
+                        <label for="outrosProjetosParticipantesProponenteProjeto" class="control-label">Projeto(s)</label>
+                        <textarea id="outrosProjetosParticipantesProponenteProjeto"
+                                  name="outrosProjetosParticipantesProponenteProjeto"
+                                  class="form-control"
+                                  rows="5"
+                                  ng-model="fichaInscricao.proponente.outrosProjetosParticipantes"
+                                  disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="fichaInscricao.proponente.tipo === 'FISICA'">
+                <label class="control-label">Dirigente é funcionário público do estado de Goiás?</label>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoFuncionarioPublicoSim" type="radio" ng-model="fichaInscricao.proponente.dirigente.funcionarioPublico" name="proponenteProjetoFuncionarioPublico" ng-value="true" disabled>Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoFuncionarioPublicoNao" type="radio" ng-model="fichaInscricao.proponente.dirigente.funcionarioPublico" name="proponenteProjetoFuncionarioPublico" ng-value="false" disabled>Não
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-5">
+                        <file-upload ng-model="fichaInscricao.proponente.dirigente.declaracao"
+                                     label="Declaração de não funcionário público (arquivo PDF)"
+                                     nome="Declaração dirigente não func. público"
+                                     extensao="pdf"
+                                     accept=".pdf, application/pdf"
+                                     download-fn="getDeclaracaoDirigente"
+                                     ng-show="fichaInscricao.proponente.dirigente.funcionarioPublico === false"
+                                     read-only="true">
+                        </file-upload>
+                    </div>
+                </div>
+                <label class="control-label">Dirigente participa de outro projeto inscrito?</label>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoParticipaOutrosProjetosSim" type="radio" ng-model="fichaInscricao.proponente.dirigente.participaOutrosProjetos" name="proponenteProjetoParticipaOutrosProjetos" ng-value="true" disabled>Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input id="proponenteProjetoParticipaOutrosProjetosNao" type="radio" ng-model="fichaInscricao.proponente.dirigente.participaOutrosProjetos" name="proponenteProjetoParticipaOutrosProjetos" ng-value="false" disabled>Não
+                    </label>
+                </div>
+                <div ng-show="fichaInscricao.proponente.dirigente.participaOutrosProjetos === true">
+                    <div class="form-group">
+                        <label for="outrosProjetosParticipantesProponenteProjeto" class="control-label">Projeto(s)</label>
+                        <textarea id="outrosProjetosParticipantesProponenteProjeto"
+                                  name="outrosProjetosParticipantesProponenteProjeto"
+                                  class="form-control"
+                                  rows="5"
+                                  ng-model="fichaInscricao.proponente.dirigente.outrosProjetosParticipantes"
+                                  disabled></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th st-sort="ano">Ano</th>
+                        <th st-sort="mecanismo">Mecanismo</th>
+                        <th st-sort="numeroProjeto">Projeto/ Nº</th>
+                        <th st-sort="situacao">Situação</th>
+                        <th st-sort="valor">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>{{item.ano}}</td>
+                        <td>{{item.mecanismo}}</td>
+                        <td>{{item.numeroProjeto}}</td>
+                        <td>{{item.situacao}}</td>
+                        <td>{{item.valorUnitario | currency: 'R$ '}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div st-pagination st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="anoApoioFinanceiro" class="control-label">Ano</label>
+                            <input id="anoApoioFinanceiro" name="anoApoioFinanceiro" type="text" class="form-control" mask="0000" ng-model="item.ano" required>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group" show-errors>
+                            <label for="mecanismoApoioFinanceiro" class="control-label">Mecanismo (100 caracteres)</label>
+                            <input id="mecanismoApoioFinanceiro" name="mecanismoApoioFinanceiro" type="text" class="form-control" ng-model="item.mecanismo"
+                                   maxlength="100"
+                                   required>
+                            <span class="label label-info">{{item.mecanismo.length || 0}} de 100 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="numeroProjetoApoioFinanceiro" class="control-label">Projeto/ Nº (50 caracteres)</label>
+                            <input id="numeroProjetoApoioFinanceiro" name="numeroProjetoApoioFinanceiro" type="text" class="form-control" ng-model="item.numeroProjeto"
+                                   maxlength="50"
+                                   required />
+                            <span class="label label-info">{{item.numeroProjeto.length || 0}} de 50 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="situacaoApoioFinanceiro" class="control-label">Situação (50 caracteres)</label>
+                            <input id="situacaoApoioFinanceiro" name="situacaoApoioFinanceiro" type="text" class="form-control" ng-model="item.situacao"
+                                   maxlength="50"
+                                   required />
+                            <span class="label label-info">{{item.situacao.length || 0}} de 50 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="valorApoioFinanceiro" class="control-label">Valor (R$)</label>
+                            <input id="valorApoioFinanceiro" name="valorApoioFinanceiro" type="text" class="form-control" mask="#.##0,00" mask-number="true" mask-options="{ reverse: true }" ng-model="item.valorUnitario" required />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

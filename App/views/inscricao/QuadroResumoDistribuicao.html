@@ -1,0 +1,235 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <label>{{label}}</label>
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="3">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th rowspan="3">Nome do evento / Produto</th>
+                        <th colspan="4">Total de ingressos / Exemplares</th>
+                        <th rowspan="3">Total</th>
+                        <th rowspan="3">Valor unitário</th>
+                        <th colspan="2" rowspan="2">Receita estimada</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Quantidade distribuição gratuita</th>
+                        <th colspan="2">Quantidade disponível para venda</th>
+                    </tr>
+                    <tr>
+                        <th>SEDUCE</th>
+                        <th>Outros</th>
+                        <th>Normal</th>
+                        <th>Meia-entrada*</th>
+                        <th>Normal</th>
+                        <th>Meia-entrada*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.descricao}}</td>
+                        <td>{{item.quantidadeDistribuidaGratuitaSeduce | number}}</td>
+                        <td>{{item.quantidadeDistribuidaGratuitaOutros | number}}</td>
+                        <td>{{item.quantidadeDisponivelVendaNormal | number}}</td>
+                        <td>{{item.quantidadeDisponivelVendaMeia | number}}</td>
+                        <td>{{item.total | number}}</td>
+                        <td>{{item.valorUnitario | currency:"R$ "}}</td>
+                        <td>{{item.receitaEstimadaVendaNormal | currency:"R$ "}}</td>
+                        <td>{{item.receitaEstimadaVendaMeia | currency:"R$ "}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10">
+                            <div st-pagination st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" show-errors>
+                            <label for="nomeEventoProjeto" class="control-label">Nome do evento / Produto (100 caracteres)</label>
+                            <input type="text" id="nomeEventoProjeto" name="nomeEventoProjeto" class="form-control" ng-model="item.descricao"
+                                   maxlength="100"
+                                   required />
+                            <span class="label label-info">{{item.descricao.length || 0}} de 100 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <label>Distribuição gratuita</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <label>Disponível para venda</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group" show-errors>
+                            <label for="quantidadeDistribuidaGratuitaSeduce" class="control-label">SEDUCE</label>
+                            <input type="text"
+                                   id="quantidadeDistribuidaGratuitaSeduce"
+                                   name="quantidadeDistribuidaGratuitaSeduce"
+                                   class="form-control"
+                                   mask="000.000.000"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   ng-model="item.quantidadeDistribuidaGratuitaSeduce"
+                                   ng-change="options.onChangeTotalQuadroResumo(item)"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group" show-errors>
+                            <label for="quantidadeDistribuidaGratuitaOutros" class="control-label">Outros</label>
+                            <input type="text"
+                                   id="quantidadeDistribuidaGratuitaOutros"
+                                   name="quantidadeDistribuidaGratuitaOutros"
+                                   class="form-control"
+                                   mask="000.000.000"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   ng-model="item.quantidadeDistribuidaGratuitaOutros"
+                                   ng-change="options.onChangeTotalQuadroResumo(item)"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group" show-errors>
+                            <label for="quantidadeDisponivelVendaNormal" class="control-label">Normal</label>
+                            <input type="text"
+                                   id="quantidadeDisponivelVendaNormal"
+                                   name="quantidadeDisponivelVendaNormal"
+                                   class="form-control"
+                                   mask="000.000.000"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   ng-model="item.quantidadeDisponivelVendaNormal"
+                                   ng-change="options.onChangeTotalQuadroResumo(item)"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group" show-errors>
+                            <label for="quantidadeDistribuidaGratuitaOutros" class="control-label">Meia-entrada*</label>
+                            <input type="text"
+                                   id="quantidadeDisponivelVendaMeia"
+                                   name="quantidadeDisponivelVendaMeia"
+                                   class="form-control"
+                                   mask="000.000.000"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   ng-model="item.quantidadeDisponivelVendaMeia"
+                                   ng-change="options.onChangeTotalQuadroResumo(item)"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="quantidadeTotalDistribuicao" class="control-label">Total</label>
+                            <input type="text"
+                                   id="quantidadeTotalDistribuicao"
+                                   name="quantidadeTotalDistribuicao"
+                                   disabled
+                                   class="form-control"
+                                   ng-model="item.total"
+                                   mask="000.000.000"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="text-center">
+                            <label>Receita estimada (R$)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group" show-errors>
+                            <label for="valorUnitarioDistribuicao" class="control-label">Valor unitário (R$)</label>
+                            <input type="text"
+                                   id="valorUnitarioDistribuicao"
+                                   name="valorUnitarioDistribuicao"
+                                   class="form-control"
+                                   mask="#.##0,00"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   ng-change="options.onChangeValorUnitarioQuadroResumo(item)"
+                                   ng-model="item.valorUnitario"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="receitaEstimadaVendaNormal" class="control-label">Normal</label>
+                            <input type="text"
+                                   id="receitaEstimadaVendaNormal"
+                                   name="receitaEstimadaVendaNormal"
+                                   class="form-control"
+                                   disabled
+                                   mask="#.##0,00"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   ng-model="item.receitaEstimadaVendaNormal" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="receitaEstimadaVendaMeia" class="control-label">Meia-entrada*</label>
+                            <input type="text"
+                                   id="receitaEstimadaVendaMeia"
+                                   name="receitaEstimadaVendaMeia"
+                                   class="form-control"
+                                   mask="#.##0,00"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   disabled
+                                   ng-model="item.receitaEstimadaVendaMeia" />
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

@@ -1,0 +1,58 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Edital - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <form name="formPrincipal" ng-submit="submit(formPrincipal)" novalidate>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <label for="descricao" class="control-label">Descrição</label>
+                                    <input id="descricao" name="descricao" type="text" class="form-control" ng-model="edital.descricao" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="mediaParaAprovacao" class="control-label">Média para aprovação</label>
+                                    <input id="mediaParaAprovacao" name="mediaParaAprovacao" type="text" class="form-control" ng-model="edital.mediaParaAprovacao" mask="00,0" mask-number="true" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="qtdDeProjetosDoInterior" class="control-label">Cota de projetos do interior</label>
+                                    <input id="qtdDeProjetosDoInterior" name="qtdDeProjetosDoInterior" type="text" class="form-control" ng-model="edital.qtdDeProjetosDoInterior" mask="00" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="qtdDeProjetosDoProponentePorEdital" class="control-label">Qtd. de projetos do proponente por edital</label>
+                                    <input id="qtdDeProjetosDoProponentePorEdital" name="qtdDeProjetosDoProponentePorEdital" type="text" class="form-control" ng-model="edital.qtdDeProjetosDoProponentePorEdital" mask="00" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="qtdDeProjetosDoProponentePorModalidade" class="control-label">Qtd. de projetos do proponente por modalidade</label>
+                                    <input id="qtdDeProjetosDoProponentePorModalidade" name="qtdDeProjetosDoProponentePorModalidade" type="text" class="form-control" ng-model="edital.qtdDeProjetosDoProponentePorModalidade" mask="00" required />
+                                </div>
+                            </div>
+                        </div>
+                        <grid-edit ng-model="edital.fases" form="formFases" label="Fases" options="opcoesFase" template-url="App/views/edital/Fases.html"></grid-edit>
+                        <grid-edit ng-model="edital.modalidades" form="formModalidades" label="Modalidades" options="opcoesModalidade" template-url="App/views/edital/Modalidades.html"></grid-edit>
+                        <grid-edit ng-model="edital.criteriosAvaliacao" form="formCriteriosDeAvaliacao" label="Critérios de avaliação" template-url="App/views/edital/CriteriosDeAvaliacao.html"></grid-edit>
+                        <grid-edit ng-model="edital.pontuacoesAvaliacao" form="formPontuacoesDeAvaliacao" label="Pontuações da avaliação" template-url="App/views/edital/PontuacoesDeAvaliacao.html"></grid-edit>
+                        <grid-edit ng-model="edital.acoesPosteriores" form="formAcoesPosteriores" label="Ações Posteriores" options="opcoesAcoesPosteriores" template-url="App/views/edital/AcoesPosteriores.html"></grid-edit>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancele()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

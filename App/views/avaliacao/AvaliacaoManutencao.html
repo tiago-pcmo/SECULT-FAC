@@ -1,0 +1,133 @@
+﻿<div class="row avaliacao" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Avaliação - {{acao}}</h1>
+                    <div class="icone-visualizar-ficha">
+                        <a href="#!/inscricao/{{opcoes.fichaInscricao.id}}" target="_blank" class="visualizar-ficha" ng-show="opcoes.fichaInscricao.fichaFinalizada && !opcoes.usuarioProponente">
+                            <spam class="glyphicon glyphicon-file "></spam>
+                            Visualizar inscrição
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <img class="gera-pdf" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAWCAYAAACG9x+sAAACxUlEQVRYR+WWy2tTQRTGv3MSE2xVUMFC22Tm3qS1oLgTBXei6Eq6kC4UX7gT6cKKIKJQ6Kai+MaFpQtb0D/AhYiPurIuRFDooiS9vbXVpQ+s2jZ3jty0V9OY1iYYY3B2M3fmnO835zGXNtXV1X6JLL/qsbQxaAWqYAgwCdDdbzNT7ZRUuleAI1Wgu4BEuUW20p8JqK1KAGM+UkJpqUrxs6K9/wvAeHhJIZn+ETGhqIixmXlVsGYg4wRMBHMCh2G8RjDX5UdaIM8Xij6BNgPg32RHcRGgTDiWmkiN5xllW6ndZOgGGBqgs2nX6cp3nIglNhK808LYF3yLuXrZAAYyhUQusTb/CEDWv91oN0nIG2JwZyGAQGQirk+B0O3PKwZgx/U5EnPMEKaZQn1p1znjC0ooNQDwQx/Asqz1nPGeCnOGICkAnWnXfZLdF9PPwNgaANjKuk7G2zsvEszrAFBZUigRsy6ApcM3boyZdt6MRecAbgM87AP4KQP2XucI+BryMk3D4+MTCWUdB+RaAJBUVr9A9pfQDUtLoVwAAYZG3NENswDWPQCDCwCAhA6mxpw+K27tZJIHAUBCqe1C1JwLIJ65zMzZi1lklAigdasI7SCY94a5x3Ect6WhYe1UODzK4O5FAA6kxpz+pNa7RHC/YjWQfyO2bTeTJ72AbAu60KIpFNftIFzJicB5iOyZZ5fYj0iZakDrw8aYVhBHQx60hNDy0/lsG/WLmIw8Is9khHmESLrSrvs427GUGiTQln+iBn7Nz8LvQLAvqdQJAV3MbaMVLeKlAmRTimZOgvhQ/kP21wAAeQXwzEK/BnPC3gL07gcYSQSCRgCrC8C+8NcIYgmwpuxttAQH5T5SXBstt5oS7GcBJgHUlHC48kcMPpCtrB6CHK28muIVEHCT6uvra6KRyCX20AbGyuLNVOTEJwHdMSQd3wFI4oVXlf8xcAAAAABJRU5ErkJggg==" alt="Gerar PDF"
+                         ng-click="getAvaliacaoPDF()" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- início do ng-repeat Principal das Avaliações-->
+            <div class="col-md-11 text-center">
+                <h2>Critérios de Avaliação</h2>
+            </div>
+            <form name="formPrincipal" ng-submit="submit(formPrincipal)" novalidate>
+                <div ng-repeat="criterioAvaliacao in opcoes.fichaInscricao.edital.criteriosAvaliacao">
+                    <div class="col-md-12">
+                        <h4>{{criterioAvaliacao.nome}} - [PESO {{criterioAvaliacao.peso}}]</h4>
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="resumoCriterioAvaliacao">Resumo</label>
+                                    <textarea id="resumoCriterioAvaliacao" name="resumoCriterioAvaliacao" class="form-control" ng-model="criterioAvaliacao.descricao" ng-disabled="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Avaliação</h4>
+                                    <ul class="list-inline pontuacao-avaliacao">
+                                        <li ng-repeat="avaliacao in opcoes.fichaInscricao.edital.pontuacoesAvaliacao track by avaliacao.id">
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="pontuacaoCriterio{{$parent.$index}}" name="pontuacaoCriterio{{$parent.$index}}" type="radio"
+                                                           ng-model="opcoes.fichaInscricao.avaliacao.criteriosAvaliacao[$parent.$index].pontuacao.id"
+                                                           ng-change="opcoes.onChangePontuacaoCriterio($parent.$index, avaliacao.valor, avaliacao.nome)"
+                                                           value="{{avaliacao.id}}" ng-value="{{avaliacao.id}}" ng-disabled="((opcoes.usuarioAdministrador) || (!((opcoes.faseAvaliacao) || (opcoes.faseRespostaRecursoAvaliacao))))" /> {{avaliacao.nome}} [{{avaliacao.valor}}]
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="row" ng-show="opcoes.fichaInscricao.avaliacao.criteriosAvaliacao[$index].pontuacao.valor">
+                                        <div class="col-md-4">
+                                            <label>Pontuação do Critério: {{criterioAvaliacao.peso * opcoes.fichaInscricao.avaliacao.criteriosAvaliacao[$index].pontuacao.valor}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="justificativaAvaliacao">Justificativa da avaliação</label>
+                                        <textarea id="justificativaAvaliacao" name="justificativaAvaliacao" class="form-control" rows="4" ng-disabled="(opcoes.usuarioAdministrador) || (!opcoes.faseAvaliacao) || opcoes.semFaseCorrenteUsuarioProponente"
+                                                  ng-model="opcoes.fichaInscricao.avaliacao.criteriosAvaliacao[$index].justificativa"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="opcoes.faseRecursoAvaliacao || opcoes.faseRespostaRecursoAvaliacao || opcoes.semFaseCorrenteUsuarioProponente || opcoes.usuarioAdministrador">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="recursoAvaliacao">Recurso da avaliação</label>
+                                        <textarea id="recursoAvaliacao" name="recursoAvaliacao" class="form-control" rows="4" ng-model="opcoes.fichaInscricao.avaliacao.criteriosAvaliacao[$index].recurso" ng-disabled="!opcoes.faseRecursoAvaliacao || opcoes.usuarioAdministrador"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="opcoes.faseRespostaRecursoAvaliacao || opcoes.semFaseCorrenteUsuarioProponente || opcoes.usuarioAdministrador">
+                                <div class="col-md-12">
+                                    <label for="respostaRecursoAvaliacao">Resposta do recurso da avaliação</label>
+                                    <textarea id="respostaRecursoAvaliacao" name="respostaRecursoAvaliacao" class="form-control" rows="4" ng-disabled="(opcoes.usuarioAdministrador) || (opcoes.faseRecursoAvaliacao) || opcoes.semFaseCorrenteUsuarioProponente"
+                                              ng-model="opcoes.fichaInscricao.avaliacao.criteriosAvaliacao[$index].respostaRecurso"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="opcoes.faseRecursoAvaliacao || opcoes.faseRespostaRecursoAvaliacao || opcoes.semFaseCorrenteUsuarioProponente">
+                    <h4>Recurso geral da avaliação</h4>
+                    <div class="well">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="recursoAvaliacao">Recurso da avaliação</label>
+                                        <textarea id="recursoAvaliacao" name="recursoAvaliacao" class="form-control" rows="4" ng-model="opcoes.fichaInscricao.avaliacao.recurso" ng-disabled="(opcoes.usuarioAdministrador) || (!opcoes.faseRecursoAvaliacao)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="opcoes.faseRespostaRecursoAvaliacao || opcoes.semFaseCorrenteUsuarioProponente">
+                                <div class="col-md-12">
+                                    <label for="respostaRecursoAvaliacao">Resposta do recurso da avaliação</label>
+                                    <textarea id="respostaRecursoAvaliacao" name="respostaRecursoAvaliacao" class="form-control" rows="4" ng-disabled="opcoes.usuarioAdministrador || opcoes.semFaseCorrenteUsuarioProponente" ng-model="opcoes.fichaInscricao.avaliacao.respostaRecurso"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <h2>
+                                    Nota Final: {{opcoes.getNotaFinal()}}
+                                </h2>
+                                <h4>
+                                    Média para aprovação: {{opcoes.fichaInscricao.edital.mediaParaAprovacao}}
+                                </h4>
+                            </div>
+                            <div class="col-sm-6 col-md-6 text-right info-classificacao" ng-class="{'ficha-classificada': opcoes.aprovado == 'Classificado', 'ficha-desclassificada': opcoes.aprovado != 'Classificado'}">
+                                <h2>
+                                    {{opcoes.aprovado}}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="opcoes.fichaInscricao.fichaFinalizada">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" ng-show="!opcoes.usuarioAdministrador && !opcoes.semFaseCorrenteUsuarioProponente">Salvar</button>
+                        <button type="button" class="btn btn-primary" ng-show="!opcoes.usuarioAdministrador && !opcoes.semFaseCorrenteUsuarioProponente" ng-click="cancele()">Cancelar</button>
+                    </div>
+                </div>
+                <!-- final do ng-repeat Principal das Avaliações -->
+            </form>
+        </div>
+    </div>
+</div>

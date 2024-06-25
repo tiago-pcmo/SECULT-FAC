@@ -1,0 +1,78 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <label>{{label}}</label>
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th st-sort="descricao">Descrição</th>
+                        <th st-sort="url">URL do arquivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.descricao}}</td>
+                        <td><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <div st-pagination st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5 col-lg-4">
+                        <div class="form-group" show-errors>
+                            <label for="descricaoLinkAnexo" class="control-label">Descrição (100 caracteres)</label>
+                            <input id="descricaoLinkAnexo" name="descricaoLinkAnexo" type="text" class="form-control" ng-model="item.descricao" maxlength="100" required />
+                            <span class="label label-info">{{item.descricao.length || 0}} de 100 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-8">
+                        <div class="form-group" show-errors>
+                            <label for="urlLinkAnexo" class="control-label">URL do arquivo (500 caracteres)</label>
+                            <input id="urlLinkAnexo" name="urlLinkAnexo" type="url" class="form-control" ng-model="item.url" placeholder="Iniciar com 'http://' ou 'https://'"
+                                   ng-pattern="/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/"
+                                   maxlength="500"
+                                   required />
+                            <span class="label label-info">{{item.url.length || 0}} de 500 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

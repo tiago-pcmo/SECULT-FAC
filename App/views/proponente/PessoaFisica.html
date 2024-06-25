@@ -1,0 +1,203 @@
+﻿<h4>Dados do proponente</h4>
+<div class="well">
+    <div class="row">
+        <div class="form-group col-md-6" show-errors>
+            <label for="nomepf" class="control-label">Nome</label>
+            <input id="nomepf" name="nomepf" type="text" class="form-control" ng-model="proponente.nome" ng-required="!juridica">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="nomeSocialProponente" class="control-label">Nome social</label>
+            <input id="nomeSocialProponente" name="nomeSocialProponente" type="text" class="form-control" ng-model="proponente.nomeSocial" ng-required="juridica">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3" show-errors>
+            <label for="cpfpf" class="control-label">CPF</label>
+            <input id="cpfpf" name="cpfpf" type="text" class="form-control" ng-model="proponente.cpf" ng-required="!juridica" mask="000.000.000-00" ng-disabled="modoEdicao">
+        </div>
+        <div class="form-group col-md-3" show-errors>
+            <label for="rgpf" class="control-label">RG</label>
+            <input id="rgpf" name="rgpf" type="text" class="form-control" ng-model="proponente.rg" ng-required="!juridica">
+        </div>
+        <div class="form-group col-md-3" show-errors>
+            <label for="orgaoexpedidorpf" class="control-label">Órgão expedidor</label>
+            <input id="orgaoexpedidorpf" name="orgaoexpedidorpf" type="text" class="form-control" ng-model="proponente.orgaoExpedidor" ng-required="!juridica">
+        </div>
+        <div class="form-group col-md-3" show-errors>
+            <label for="dataemissaopf" class="control-label">Data de emissão</label>
+            <input id="dataemissaopf" name="dataemissao" type="text" class="form-control" ng-model="proponente.dataEmissao" ng-required="!juridica" mask="00/00/0000" mask-clean="false">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6" show-errors>
+            <label for="profissaoFf" class="control-label">Profissão</label>
+            <input id="profissaoFf" name="profissao" type="text" class="form-control" ng-model="proponente.profissao" ng-required="!juridica">
+        </div>
+
+        <div class="form-group col-md-6" show-errors>
+            <label for="cargoFuncaoFf" class="control-label">Cargo ou função</label>
+            <input id="cargoFuncaoFf" name="cargoFuncaoFf" type="text" class="form-control" ng-model="proponente.cargoFuncao" ng-required="!juridica">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2" show-errors>
+            <label for="dataNascimentoPf" class="control-label">Data de nascimento</label>
+            <input id="dataNascimentoPf" name="dataNascimentoPf" type="text" class="form-control" ng-model="proponente.dataNascimento" ng-required="!juridica" mask="00/00/0000" mask-clean="false">
+        </div>
+        <div class="form-group col-md-4" show-errors>
+            <label for="generoPf" class="control-label">Gênero</label>
+            <input id="generoPf" name="generoPf" type="text" class="form-control" ng-model="proponente.sexo" ng-required="!juridica">
+        </div>
+        <div class="form-group col-md-3" show-errors>
+            <label for="escolaridadePf" class="control-label">Escolaridade</label>
+            <select id="escolaridadePf"
+                    name="escolaridadePf"
+                    class="form-control"
+                    ng-model="proponente.escolaridade"
+                    ng-options="escolaridade.descricao for escolaridade in escolaridades track by escolaridade.id"
+                    ng-required="!juridica">
+                <option value="">Selecione</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3" show-errors>
+            <label for="situacaoPf" class="control-label">Situação</label>
+            <select id="situacaoPf"
+                    name="situacaoPf"
+                    class="form-control"
+                    ng-model="proponente.escolaridadeSituacao"
+                    ng-options="escolaridadeSituacao.descricao for escolaridadeSituacao in escolaridadesSituacoes track by escolaridadeSituacao.id"
+                    ng-required="!juridica">
+                <option value="">Selecione</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12" show-errors>
+            <label for="atuacaoPf" class="control-label">Atuação</label>
+            <select id="atuacaoPf"
+                    name="atuacaoPf"
+                    class="form-control"
+                    ng-model="proponente.atuacao"
+                    ng-options="atuacao.descricao for atuacao in atuacoes track by atuacao.id"
+                    ng-required="!juridica">
+                <option value="">Selecione</option>
+            </select>
+        </div>
+    </div>
+    <div class="row" ng-show="proponente.atuacao.id == '1' || proponente.atuacao.id == '5' || proponente.atuacao.id == '6'">
+        <div class="form-group col-md-12" show-errors>
+            <label for="atuacaoDescricaoPf" class="control-label">Área de atuação</label>
+            <input id="atuacaoDescricaoPf"
+                   name="atuacaoDescricaoPf"
+                   type="text"
+                   class="form-control"
+                   ng-model="proponente.atuacaoArea"
+                   ng-required="!juridica && (proponente.atuacao.id == '1' || proponente.atuacao.id == '5' || proponente.atuacao.id == '6')">
+        </div>
+    </div>
+    <div class="row" ng-show="proponente.atuacao.id == '1'">
+        <div class="form-group col-md-12" show-errors>
+            <label for="funcaoDescricaoPf" class="control-label">Função de atuação</label>
+            <input id="funcaoDescricaoPf"
+                   name="funcaoDescricaoPf"
+                   type="text"
+                   class="form-control"
+                   ng-model="proponente.atuacaoFuncao"
+                   ng-required="!juridica && proponente.atuacao.id == '1'">
+        </div>
+    </div>
+</div>
+<h4>Contato do proponente</h4>
+<div class="well">
+    <div class="row">
+        <div class="form-group col-md-2" show-errors>
+            <label for="telefonePf" class="control-label">Telefone</label>
+            <input id="telefonePf" name="telefonePf" type="text" class="form-control" ng-model="proponente.telefone" ng-required="!juridica" mask="(00) 00000000">
+        </div>
+        <div class="form-group col-md-2" show-errors>
+            <label for="celularPf" class="control-label">Celular</label>
+            <input id="celularPf" name="celularPf" type="text" class="form-control" ng-model="proponente.celular" ng-required="!juridica" mask="(00) 000000000">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="faxPf" class="control-label">Fax</label>
+            <input id="faxPf" name="faxPf" type="text" class="form-control" ng-model="proponente.fax" mask="(00) 00000000">
+        </div>
+        <div class="form-group col-md-6" show-errors>
+            <label for="emailPf" class="control-label">Email</label>
+            <input id="emailPf" name="emailPf" type="email" class="form-control" ng-model="proponente.email" ng-pattern="/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" ng-required="!juridica">
+        </div>
+    </div>
+</div>
+<h4>Proponente é funcionário público do estado de Goiás?</h4>
+<div class="well">
+    <div class="row">
+        <div class="form-group col-md-12" ng-init="proponente.funcionarioPublico = false">
+            <label class="radio-inline">
+                <input id="proponenteFuncionarioPublicoSim" type="radio" ng-model="proponente.funcionarioPublico" name="proponenteFuncionarioPublico" ng-value="true">Sim
+            </label>
+            <label class="radio-inline">
+                <input id="proponenteFuncionarioPublicoNao" type="radio" ng-model="proponente.funcionarioPublico" name="proponenteFuncionarioPublico" ng-value="false">Não
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+            <file-upload ng-model="proponente.declaracao"
+                         label="Declaração de não funcionário público (arquivo PDF)"
+                         nome="Declaração proponente não func. público"
+                         extensao="pdf"
+                         accept=".pdf, application/pdf"
+                         download-fn="getDeclaracaoProponente"
+                         ng-show="proponente.funcionarioPublico === false">
+            </file-upload>
+        </div>
+    </div>
+</div>
+<h4>Proponente participa de outro projeto inscrito?</h4>
+<div class="well">
+    <div class="row">
+        <div class="form-group col-md-12" ng-init="proponente.participaOutrosProjetos = false">
+            <label class="radio-inline">
+                <input id="proponenteParticipaOutrosProjetosSim" type="radio" ng-model="proponente.participaOutrosProjetos" name="proponenteParticipaOutrosProjetos" ng-value="true">Sim
+            </label>
+            <label class="radio-inline">
+                <input id="proponenteParticipaOutrosProjetosNao" type="radio" ng-model="proponente.participaOutrosProjetos" name="proponenteParticipaOutrosProjetos" ng-value="false">Não
+            </label>
+        </div>
+    </div>
+    <div class="row" ng-show="proponente.participaOutrosProjetos === true">
+        <div class="form-group col-md-12" show-errors>
+            <label for="outrosProjetosParticipantesProponente" class="control-label">Projeto(s)</label>
+            <textarea id="outrosProjetosParticipantesProponente"
+                      name="outrosProjetosParticipantesProponente"
+                      class="form-control"
+                      rows="5"
+                      ng-model="proponente.outrosProjetosParticipantes"
+                      ng-required="proponente.participaOutrosProjetos === true"></textarea>
+        </div>
+    </div>
+</div>
+<h4>Proponente já teve projeto aprovado em leis de financiamento (municipal, estadual, federal), privados?</h4>
+<div class="well">
+    <div class="row">
+        <div class="form-group col-md-12" ng-init="proponente.possuiProjetosAprovados = false">
+            <label class="radio-inline">
+                <input id="proponenteLeiFinanciamentoSim" type="radio" ng-model="proponente.possuiProjetosAprovados" name="proponenteLeiFinanciamento" ng-value="true">Sim
+            </label>
+            <label class="radio-inline">
+                <input id="proponenteLeiFinanciamentoNao" type="radio" ng-model="proponente.possuiProjetosAprovados" name="proponenteLeiFinanciamento" ng-value="false">Não
+            </label>
+        </div>
+    </div>
+    <div class="row" ng-show="proponente.possuiProjetosAprovados === true">
+        <div class="form-group col-md-12" show-errors>
+            <label for="projetosParticipantesProponente" class="control-label">Projeto(s)</label>
+            <textarea id="projetosParticipantesProponente"
+                      name="projetosParticipantesProponente"
+                      class="form-control"
+                      rows="5"
+                      ng-model="proponente.projetosParticipantes"
+                      ng-required="proponente.possuiProjetosAprovados === true"></textarea>
+        </div>
+    </div>
+</div>

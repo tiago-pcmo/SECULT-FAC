@@ -1,0 +1,249 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Inscrição - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form name="formPrincipal" class="ficha-inscricao" novalidate>
+                    <div class="alert alert-info" role="alert">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        A numeração dos campos corresponde à numeração especificada no <u>Anexo II</u> de cada edital.
+                    </div>
+                    <div ng-show="fichaInscricao.fichaFinalizada && fichaInscricao.dataFinalizacao">
+                        <h3>Data e hora do envio da inscrição</h3>
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <strong>
+                                        <input id="dataFinalizacaoFicha" name="dataFinalizacaoFicha" type="text" class="form-control success input-lg" ng-model="fichaInscricao.dataFinalizacao" disabled />
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Título (150 caracteres)</h4>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" show-errors>
+                                    <input id="titulo" name="titulo" type="text" class="form-control" ng-model="fichaInscricao.titulo"
+                                           maxlength="150"
+                                           required />
+                                    <span class="label label-info">{{fichaInscricao.titulo.length || 0}} de 150 caracteres</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Modalidade</h4>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="edital" class="control-label">Edital</label>
+                                    <select id="edital"
+                                            name="edital"
+                                            class="form-control"
+                                            ng-model="fichaInscricao.edital"
+                                            ng-options="edital.descricao for edital in editais track by edital.id"
+                                            ng-change="onChangeEdital()"
+                                            ng-disabled="modoEdicao"
+                                            required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="modalidade" class="control-label">Modalidade</label>
+                                    <select id="modalidade"
+                                            name="modalidade"
+                                            class="form-control"
+                                            ng-model="fichaInscricao.modalidade"
+                                            ng-options="modalidade.descricao for modalidade in modalidades track by modalidade.id"
+                                            ng-change="onChangeModalidade()"
+                                            ng-disabled="!fichaInscricao.edital"
+                                            required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="modulo" class="control-label">Módulo</label>
+                                    <select id="modulo"
+                                            name="modulo"
+                                            class="form-control"
+                                            ng-model="fichaInscricao.modulo"
+                                            ng-options="modulo.descricao for modulo in modulos track by modulo.id"
+                                            ng-change="opcoesPlanilhaOrcamentaria.setValorDiferencaPlanilhaParaPremio()"
+                                            ng-disabled="!fichaInscricao.modalidade"
+                                            required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="valorPremio" class="control-label">Valor do prêmio (R$)</label>
+                                    <strong>
+                                        <input id="valorPremio" name="valorPremio" type="text" class="form-control" mask="#.##0,00" mask-number="true" mask-options="{ reverse: true }" ng-model="fichaInscricao.modulo.valor" disabled />
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Duração do projeto (estes campos são necessários para salvar a inscrição)</h4>
+                    <div class="alert alert-info" role="alert">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        A duração do projeto corresponde aos dados informados no item <u>10. Descrição das atividades e estratégias de ação</u>.
+                    </div>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="dataInicioFichaInscricao" class="control-label">Data início</label>
+                                    <strong>
+                                        <input id="dataInicioFichaInscricao" name="dataInicioFichaInscricao" type="text" class="form-control" placeholder="__/__/____" ng-model="fichaInscricao.dataInicio" disabled />
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="dataFimFichaInscricao" class="control-label">Data fim</label>
+                                    <strong>
+                                        <input id="dataFimFichaInscricao" name="dataFimFichaInscricao" type="text" class="form-control" placeholder="__/__/____" ng-model="fichaInscricao.dataFim" disabled />
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <uib-tabset active="0" type="tabs" justified="true" class="tabs-inscricao">
+                                <uib-tab index="0" heading="Identificação">
+                                    <uib-tab-heading>
+                                        Identificação&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('identificacao')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/Identificacao.html'"></ng-include>
+                                </uib-tab>
+                                <uib-tab index="1" heading="Metas">
+                                    <uib-tab-heading>
+                                        Metas&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('Metas')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/Metas.html'"></ng-include>
+                                </uib-tab>
+                                <uib-tab index="2" heading="Ficha técnica">
+                                    <uib-tab-heading>
+                                        Ficha&nbsp;técnica&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('FichaTecnica')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/FichaTecnica.html'"></ng-include>
+                                </uib-tab>
+                                <uib-tab index="3" heading="Divulgação">
+                                    <uib-tab-heading>
+                                        Divulgação&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('Divulgacao')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/Divulgacao.html'"></ng-include>
+                                </uib-tab>
+                                <uib-tab index="4" heading="Orçamento">
+                                    <uib-tab-heading>
+                                        Orçamento&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('Orcamento')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/Orcamento.html'"></ng-include>
+                                </uib-tab>
+                                <uib-tab index="5" heading="Anexos">
+                                    <uib-tab-heading>
+                                        Anexos&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('Anexos')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/Anexos.html'"></ng-include>
+                                </uib-tab>
+                                <uib-tab index="6" heading="Formação" disable="!projetoDeFormacao">
+                                    <uib-tab-heading>
+                                        Formação&nbsp;|&nbsp;
+                                        <i>
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAALCAYAAABlNU3NAAABeElEQVQ4T7WTPWtUYRCFnzPvgqIIfhQWWXYvrNqLASsbWzsRQdBaVAgIChYW9ioS/QEiWohKUmqR0sImYGGpMaidIPhJPu6dI3dhIQRXtkjecpj3PDNzZjTo9x+ALgPB1r6Uua9Bv2q2QXxYamautgBvLjzxL6HvAgEHgZL4q9CaYWfAgaGA86cUP0b/BVObtJp/Akjd/fD547U2udvt7t9Rypxdbi59Wnrdxga93rFUPCvi8fvl5Vsj0UG/qttiNkDGAyy9MvVcRMwAK874osgz1HlOUa4kWonIacNbmyetqGD3xB2o+IXt29g3TExDLIr6PIqLJPOiuU4pF9YyZzvuDIaAyDcTd9AU3wn7ZEhHmiavSp1TKE8DZ8EzIbXLcZTUYiM/bAEjbyYaEcULmJejZDtOjDw4XFXHs+GpCo9IvbP8fMyGj/EA/gCrwL4NG/LNmespdoViTxs3/FayTrD3f4DtvYNDvepe47wUEZ2tPOTMrKPE7F86eKgjzQrdqwAAAABJRU5ErkJggg=="
+                                                 alt="Gerar PDF Identificação"
+                                                 class="gera-pdf-abas"
+                                                 ng-click="gerarPDF('Formacao')" />
+                                        </i>
+                                    </uib-tab-heading>
+                                    <ng-include src="'App/views/inscricao/FormularioProjetoFormacao.html'"></ng-include>
+                                </uib-tab>
+                            </uib-tabset>
+                        </div>
+                    </div>
+                    <hr />
+                    <div ng-show="acoes.editar">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-info" ng-click="salve(formPrincipal)">Salvar</button>
+                                <button type="button" class="btn btn-primary" ng-click="cancele()">Cancelar</button>
+                            </div>
+                        </div>
+                        <hr />
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <br />
+                                <div class="alert alert-warning" role="alert">
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                    Atenção:
+                                    <ul>
+                                        <li>Após Enviar (finalizar) sua ficha, não será permitido efetuar alterações.</li>
+                                        <li>A ficha só participará dos processos de Habilitação e avaliação após o seu "Envio/Finalização".</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 ">
+                                <button type="button" class="btn btn-warning btn-block" ng-click="submit(formPrincipal)">Enviar (Finalizar)</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

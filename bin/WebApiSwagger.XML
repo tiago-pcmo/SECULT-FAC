@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FAC</name>
+    </assembly>
+    <members>
+        <member name="P:FAC.Entities.Endereco.Cep">
+            <summary>
+            Recupera ou define o CEP.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.Logradouro">
+            <summary>
+            Recupera ou define o logradouro.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.Complemento">
+            <summary>
+            Recupera ou define o complemento.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.Numero">
+            <summary>
+            Recupera ou define o número.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.Bairro">
+            <summary>
+            Recupera ou define o bairro.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.Municipio">
+            <summary>
+            Recupera ou define o município.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.UF">
+            <summary>
+            Recupera ou define a unidade federativa.
+            </summary>
+        </member>
+        <member name="P:FAC.Entities.Endereco.Tipo">
+            <summary>
+            Recupera o defie o tipo do endereço (Residencial; Empresarial).
+            </summary>
+        </member>
+    </members>
+</doc>

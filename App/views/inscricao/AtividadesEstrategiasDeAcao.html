@@ -1,0 +1,115 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nova
+                            </button>
+                        </th>
+                        <th st-sort="tipo.descricao">Tipo</th>
+                        <th st-sort="descricaoAtividade">Descrição das atividades</th>
+                        <th st-sort="dataInicio">Data início</th>
+                        <th st-sort="dataFim">Data fim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>{{item.tipo.descricao}}</td>
+                        <td class="text-left">{{item.descricaoAtividade}}</td>
+                        <td>{{item.dataInicio}}</td>
+                        <td>{{item.dataFim}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <div st-pagination st-items-by-page="10"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="tipoAtividadesEstrategiasDeAcao" class="control-label">Tipo</label>
+                            <select id="tipoAtividadesEstrategiasDeAcao"
+                                    name="tipoAtividadesEstrategiasDeAcao"
+                                    class="form-control"
+                                    ng-model="item.tipo"
+                                    ng-options="tipo.descricao for tipo in options.tiposAtividadesEstrategiasDeAcao track by tipo.id"
+                                    required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="dataInicioAtividadesEstrategiasDeAcao" class="control-label">Data início</label>
+                            <input id="dataInicioAtividadesEstrategiasDeAcao"
+                                   name="dataInicioAtividadesEstrategiasDeAcao"
+                                   type="text"
+                                   class="form-control"
+                                   ng-model="item.dataInicio"
+                                   mask="00/00/0000"
+                                   mask-clean="false"
+                                   placeholder="Ex.: 14/12/2016"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group" show-errors>
+                            <label for="dataFimAtividadesEstrategiasDeAcao" class="control-label">Data fim</label>
+                            <input id="dataFimAtividadesEstrategiasDeAcao"
+                                   name="dataFimAtividadesEstrategiasDeAcao"
+                                   type="text" class="form-control"
+                                   ng-model="item.dataFim"
+                                   mask="00/00/0000"
+                                   mask-clean="false"
+                                   placeholder="Ex.: 15/12/2016"
+                                   required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" show-errors>
+                            <label for="descricaoAtividadesEstrategiasDeAcao" class="control-label">Descrição das atividades (150 caracteres)</label>
+                            <input id="descricaoAtividadesEstrategiasDeAcao" name="descricaoAtividadesEstrategiasDeAcao" type="text" class="form-control" ng-model="item.descricaoAtividade"
+                                   maxlength="150"
+                                   required />
+                            <span class="label label-info">{{item.descricaoAtividade.length || 0}} de 150 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

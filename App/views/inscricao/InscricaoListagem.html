@@ -1,0 +1,377 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Inscrições {{acao}}</h1>
+        </div>
+        <div class="hide" ng-class="{show:exibirFiltros}">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="listaeditais" class="control-label">Edital</label>
+                                    <select id="listaeditais"
+                                            name="listaeditais"
+                                            class="form-control"
+                                            ng-model="opcoes.editalSelecionado"
+                                            ng-change="opcoes.onChangeEdital()"
+                                            ng-options="edital.descricao for edital in opcoes.editais track by edital.id"
+                                            required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="listaModalidades" class="control-label">Modalidade</label>
+                                    <select id="listaModalidades"
+                                            name="listaModalidades"
+                                            class="form-control"
+                                            ng-model="opcoes.modalidadeSelecionada"
+                                            ng-disabled="!opcoes.editalSelecionado || !opcoes.modalidades"
+                                            ng-change="opcoes.onChangeModalidade()"
+                                            ng-options="modalidade.descricao for modalidade in opcoes.modalidades track by modalidade.id"
+                                            required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="listaModulos" class="control-label">Módulo</label>
+                                    <select id="listaModulo"
+                                            name="listaModulo"
+                                            class="form-control"
+                                            ng-model="opcoes.moduloSelecionado"
+                                            ng-disabled="!opcoes.modalidadeSelecionada"
+                                            ng-change="opcoes.onchangeModulo()"
+                                            ng-options="modulo.descricao for modulo in opcoes.modulos track by modulo.id"
+                                            required>
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-primary" ng-click="limparFiltros(item.edital)">
+                                    <spam class="glyphicon glyphicon-refresh"></spam> Limpar Filtros
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <div class="table-responsive">
+                        <table st-table="fichasExibidas" st-safe-src="opcoes.fichasInscricao" class="table table-bordered listagem-fichas">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button type="button" class="btn btn-primary btn-xs" ng-click="nova()" ng-show="usuarioProponente && editalEmInscricao">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nova
+                                        </button>
+                                        <span ng-hide="usuarioProponente && editalEmInscricao">Ações</span>
+                                    </th>
+                                    <th st-sort="edital">Edital</th>
+                                    <th st-sort="fase">Fase do edital</th>
+                                    <th st-sort="modalidade">Modalidade</th>
+                                    <th st-sort="modulo">Módulo</th>
+                                    <th st-sort="titulo">Título projeto</th>
+                                    <th ng-show="usuarioProponente" st-sort="fichaFinalizada">Enviada</th>
+                                    <th ng-hide="usuarioHabilitador" st-sort="habilitado">Habilitado</th>
+                                    <th ng-hide="usuarioHabilitador" st-sort="classificado">Classificado</th>
+                                    <th ng-hide="usuarioProponente || usuarioHabilitador" st-sort="nota">Situação Ficha</th>
+                                    <th ng-hide="usuarioProponente || usuarioHabilitador" st-sort="nota">Nota</th>
+                                    <th ng-show="usuarioHabilitador" st-sort="habilitado">Habilitado</th>
+                                    <th ng-show="usuarioHabilitador" st-sort="habilitadoHabilitacao">Habilitado em recurso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="ficha in fichasExibidas">
+                                    <td class="acoes">
+                                        <div class="row">
+                                            <ul class="list-inline">
+                                                <li ng-show="ficha.acoes.visualizar">
+                                                    <a ng-href="#!/inscricao/{{ficha.fichaInscricao.id}}" uib-tooltip="Visualizar">
+                                                        <spam class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.visualizarHabilitacao">
+                                                    <a ng-href="#!/habilitacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Visualizar habilitação">
+                                                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.visualizarAvaliacao">
+                                                    <a ng-href="#!/avaliacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Visualizar avaliação">
+                                                        <spam class="glyphicon glyphicon-list" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.habilitar">
+                                                    <a ng-href="#!/habilitacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Habilitar">
+                                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.responderRecursoHabilitacao">
+                                                    <a ng-href="#!/habilitacao/recurso/resposta/{{ficha.fichaInscricao.id}}" uib-tooltip="Responder recurso de habilitação">
+                                                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.editar">
+                                                    <a ng-href="#!/inscricao/{{ficha.fichaInscricao.id}}" uib-tooltip="Editar">
+                                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.baixarPdf">
+                                                    <a ng-click="getFichaInscricaoPdf(ficha.fichaInscricao.id, ficha.fichaInscricao.titulo)" uib-tooltip="Download">
+                                                        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.abrirRecursoParaHabilitacao">
+                                                    <a ng-href="#!/habilitacao/recurso/{{ficha.fichaInscricao.id}}" uib-tooltip="Abrir recurso da habilitação">
+                                                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.abrirRecursoParaAvaliacao">
+                                                    <a ng-href="#!/avaliacao/recurso/{{ficha.fichaInscricao.id}}" uib-tooltip="Abrir recurso da avaliação">
+                                                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.excluir">
+                                                    <a ng-click="exclua(ficha.fichaInscricao.id)" uib-tooltip="Excluir">
+                                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.avaliar">
+                                                    <a ng-href="#!/avaliacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Avaliar">
+                                                        <spam class="glyphicon glyphicon-list" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.responderRecursoAvaliacao">
+                                                    <a ng-href="#!/avaliacao/recurso/resposta/{{ficha.fichaInscricao.id}}" uib-tooltip="Responder recurso de avaliação">
+                                                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                                                    </a>
+                                                </li>
+                                                <li ng-show="ficha.acoes.atribuirSituacaoAprovacaoProjeto">
+                                                    <a ng-href="#!/classificacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Situação da classificação">
+                                                        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="text-left">{{ficha.fichaInscricao.edital.descricao}}</td>
+                                    <td>{{ficha.fichaInscricao.edital.nomeFaseCorrente}}</td>
+                                    <td>{{ficha.fichaInscricao.modalidade.descricao}}</td>
+                                    <td>{{ficha.fichaInscricao.modulo.descricao}}</td>
+                                    <td class="text-left">{{ficha.fichaInscricao.titulo}}</td>
+                                    <td ng-show="usuarioProponente">{{ficha.fichaInscricao.fichaFinalizada ? 'Sim': 'Não'}}</td>
+                                    <td ng-hide="usuarioHabilitador">{{ficha.fichaInscricao.habilitacao.habilitado ? 'Sim': 'Não'}}</td>
+                                    <td ng-hide="usuarioHabilitador">{{ficha.fichaInscricao.avaliacao.classificado ? 'Sim': 'Não'}}</td>
+                                    <td ng-hide="usuarioProponente || usuarioHabilitador">{{usuarioProponente || usuarioHabilitador ? '-' : obterSituacaoAprov(ficha.fichaInscricao.aprovado) }}</td>
+                                    <td ng-hide="usuarioProponente || usuarioHabilitador">{{usuarioProponente || usuarioHabilitador ? '-' : ficha.fichaInscricao.avaliacao.notaFinal | number}}</td>
+                                    <td ng-show="usuarioHabilitador">{{ficha.fichaInscricao.habilitacao.habilitadoHabilitacao ? 'Sim': 'Não'}}</td>
+                                    <td ng-show="usuarioHabilitador">{{ficha.fichaInscricao.habilitacao.habilitadoRecurso ? 'Sim': 'Não'}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="{{colunasPorTipoUsuario}}">
+                                        <div st-pagination st-items-by-page="10"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="icone-informacoes-menu-ficha" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-question-sign"></span> informação sobre os menus</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row hide" ng-class="{show:exibirAcoesPosAprovacao}">
+    <div class="col-md-12">
+        <h3>Ações pós-aprovação</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.enviarDocumentacao">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/documentacao/" class="btn btn-lg btn-default " aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Documentação</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.aprovacaoLogo">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/logo/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Aprovação de Logo</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.alteracaoProjeto">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/alteracao/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Alteração de projeto</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.formularioEstreia">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/formularioEstreia/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Formulário de estreia</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.relatorioMensal">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/formularioTrimestral/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Formulário trimestral</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.prestacaoContas">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/prestacaoContas/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Prestação de contas</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.catalogacao">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/catalogacao/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Catalogação de produtos culturais</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-md-2" ng-show="opcoes.acoesPosAprovacao.relatorioMensal">
+                            <div class="form-group text-center grupo-acao-pos-aprovacao">
+                                <a ng-href="#!/prestacaoContas/" class="btn btn-lg btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                                </a>
+                                <br />
+                                <label class="control-label label-descricao-acao">Prestação de Contas</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <br />
+            <ul class="list-unstyled legenda-acoes-ficha">
+                <li>
+                    <spam class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam> Visualizar
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Baixar
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Excluir
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Visualizar habilitação
+                </li>
+                <li>
+                    <spam class="glyphicon glyphicon-list" aria-hidden="true"></spam> Visualizar avaliação
+                </li>
+                <!--<li ng-show="ficha.acoes.visualizar">
+                    <a ng-href="#!/inscricao/{{ficha.fichaInscricao.id}}" uib-tooltip="Visualizar">
+                        <spam class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.visualizarHabilitacao">
+                    <a ng-href="#!/habilitacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Visualizar habilitação">
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.visualizarAvaliacao">
+                    <a ng-href="#!/avaliacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Visualizar avaliação">
+                        <spam class="glyphicon glyphicon-list" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.habilitar">
+                    <a ng-href="#!/habilitacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Habilitar">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.responderRecursoHabilitacao">
+                    <a ng-href="#!/habilitacao/recurso/resposta/{{ficha.fichaInscricao.id}}" uib-tooltip="Responder recurso de habilitação">
+                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.editar">
+                    <a ng-href="#!/inscricao/{{ficha.fichaInscricao.id}}" uib-tooltip="Editar">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.baixarPdf">
+                    <a ng-click="getFichaInscricaoPdf(ficha.fichaInscricao.id, ficha.fichaInscricao.titulo)" uib-tooltip="Download">
+                        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.abrirRecursoParaHabilitacao">
+                    <a ng-href="#!/habilitacao/recurso/{{ficha.fichaInscricao.id}}" uib-tooltip="Abrir recurso da habilitação">
+                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.abrirRecursoParaAvaliacao">
+                    <a ng-href="#!/avaliacao/recurso/{{ficha.fichaInscricao.id}}" uib-tooltip="Abrir recurso da avaliação">
+                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.excluir">
+                    <a ng-click="exclua(ficha.fichaInscricao.id)" uib-tooltip="Excluir">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </li>-->
+                <!--<li ng-show="ficha.acoes.avaliar">
+                    <a ng-href="#!/avaliacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Avaliar">
+                        <spam class="glyphicon glyphicon-list" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.responderRecursoAvaliacao">
+                    <a ng-href="#!/avaliacao/recurso/resposta/{{ficha.fichaInscricao.id}}" uib-tooltip="Responder recurso de avaliação">
+                        <spam class="glyphicon glyphicon-share-alt" aria-hidden="true"></spam>
+                    </a>
+                </li>
+                <li ng-show="ficha.acoes.atribuirSituacaoAprovacaoProjeto">
+                    <a ng-href="#!/classificacao/{{ficha.fichaInscricao.id}}" uib-tooltip="Situação da classificação">
+                        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</div>

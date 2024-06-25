@@ -1,0 +1,87 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Conselheiro - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <form name="formPrincipal" ng-submit="submit(formPrincipal)" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="nomeCompleto" class="control-label">Nome completo</label>
+                                    <input id="nomeCompleto" name="nomeCompleto" type="text" class="form-control" ng-model="conselheiro.nomeCompleto" required />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="dataNascimento" class="control-label">Data de nascimento</label>
+                                    <input id="dataNascimento" name="dataNascimento" type="text" mask="00/00/0000" mask-clean="false" placeholder="Ex.: 07/12/2016" class="form-control" ng-model="conselheiro.dataNascimento" required />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="cpf" class="control-label">CPF</label>
+                                    <input id="cpf" name="cpf" type="text" class="form-control" ng-model="conselheiro.cpf" mask="000.000.000-00" mask-validate="false" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" show-errors>
+                                    <label for="email" class="control-label">E-Mail</label>
+                                    <input id="email" name="email" type="text" class="form-control" ng-model="conselheiro.email" ng-pattern="/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" required />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="telefone" class="control-label">Telefone</label>
+                                    <input id="telefone" name="telefone" type="text" class="form-control" ng-model="conselheiro.telefone" mask="(00) 000000000" mask-validade="false" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group" ng-init="conselheiro.status='ACTIVE'">
+                                    <label for="Situacao" class="control-label">Situação</label>
+                                    <div>
+                                        <label class="radio-inline">
+                                            <input type="radio" id="statusAtivo" name="status" ng-value="'ACTIVE'" ng-model="conselheiro.status" />Ativo
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" id="statusInativo" name="status" ng-value="'INACTIVE'" ng-model="conselheiro.status" />Inativo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="usuario" class="control-label">Usuário</label>
+                                    <input id="usuario" name="usuario" type="text" class="form-control" ng-model="conselheiro.usuario" required ng-disabled="modoEdicao" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="senha" class="control-label" ng-show="!modoEdicao">Senha</label>
+                                    <input id="senha" name="senha" type="password" class="form-control" ng-model="conselheiro.senha" ng-required="!modoEdicao" ng-show="!modoEdicao" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" show-errors>
+                                    <label for="confirmarSenha" class="control-label" ng-show="!modoEdicao">Confirmar senha</label>
+                                    <input id="confirmarSenha" name="confirmarSenha" type="password" class="form-control" ng-model="conselheiro.confirmSenha" field-match="senha" ng-required="!modoEdicao" ng-show="!modoEdicao" />
+                                    <span class="help-block" ng-show="formPrincipal.confirmarSenha.$error.fieldmatch">Senha e confirmação de senha não conferem.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <grid-edit ng-model="conselheiro.fichasInscricaoAvaliacao" form="formFichasAvaliacao" label="Fichas de inscrição para avaliação" options="opcoes" template-url="App/views/conselheiro/FichasConselheiro.html"></grid-edit>
+                        <grid-edit ng-model="conselheiro.fichasInscricaoRespostaRecurso" form="formFichasRespRecurso" label="Fichas de inscrição para resposta de avaliação" options="opcoes" template-url="App/views/conselheiro/FichasConselheiro.html"></grid-edit>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancele()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

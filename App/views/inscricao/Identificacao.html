@@ -1,0 +1,303 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div ng-show="acoes.habilitar || acoes.responderRecursoHabilitacao">
+            <ng-include src="'App/views/inscricao/IdentificacaoProponente.html'"></ng-include>
+        </div>
+        <div ng-hide="acoes.avaliar || acoes.responderRecursoAvaliacao">
+            <h4>Proprietário intelectual do projeto</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Neste campo será inserido o proprietário intelectual do projeto, ou seja, o dono da idéia, da proposta.
+            </div>
+            <div class="alert alert-success" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                A convenção da Organização Mundial da Propriedade Intelectual (OMPI) define como propriedade intelectual como "a soma dos direitos relativos às obras literárias,
+                artísticas e cientificas, às interpretações dos artistas intérpretes e às execuções dos artistas executantes, aos fonogramas e às emissões de radiodifusão, às invenções
+                em todos os domínios da atividade humana, às descobertas científicas, aos desenhos e modelos industriais, às marcas industriais, comerciais e de serviço, bem como às firmas
+                comerciais e denominações comercias, à proteção contra a concorrência desleal e todos os outros direitos inerentes à atividade intelectual nos domínios industrial, científico, literário e artístico".
+            </div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">Proponente é o proprietário intelectual do projeto?</label>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input id="proponenteProprietarioIntelectualProjetoSim" type="radio" ng-model="fichaInscricao.proponenteProprietarioIntelectualProjeto" name="proponenteProprietarioIntelectualProjeto" ng-value="true" ng-change="onChangeProponenteProprietarioIntelectual()">Sim
+                            </label>
+                            <label class="radio-inline">
+                                <input id="proponenteProprietarioIntelectualProjetoNao" type="radio" ng-model="fichaInscricao.proponenteProprietarioIntelectualProjeto" name="proponenteProprietarioIntelectualProjeto" ng-value="false" ng-change="onChangeProponenteProprietarioIntelectual()">Não
+                            </label>
+                        </div>
+                        <div class="form-group" ng-show="fichaInscricao.proponenteProprietarioIntelectualProjeto === false" show-errors>
+                            <label for="nomeProprietarioIntelectual" class="control-label">Nome proprietário intelectual (250 caracteres)</label>
+                            <input id="nomeProprietarioIntelectual"
+                                   name="nomeProprietarioIntelectual"
+                                   type="text"
+                                   class="form-control"
+                                   ng-model="fichaInscricao.nomeProprietarioIntelectualProjeto"
+                                   ng-required="fichaInscricao.proponenteProprietarioIntelectualProjeto === false"
+                                   maxlength="250" />
+                            <span class="label label-info">{{fichaInscricao.nomeProprietarioIntelectualProjeto.length || 0}} de 250 caracteres</span>
+                        </div>
+                        <div ng-show="fichaInscricao.proponenteProprietarioIntelectualProjeto === false">
+                            <label class="control-label">Proprietário intelectual é funcionário público do estado de Goiás?</label>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="radio-inline">
+                                        <input id="proprietarioFuncionarioPublicoSim" type="radio" ng-model="fichaInscricao.proprietarioIntelecutalFuncionarioPublico" name="proprietarioFuncionarioPublico" ng-value="true">Sim
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input id="proprietarioFuncionarioPublicoNao" type="radio" ng-model="fichaInscricao.proprietarioIntelecutalFuncionarioPublico" name="proprietarioFuncionarioPublico" ng-value="false">Não
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5">
+                                    <file-upload ng-model="fichaInscricao.declaracaoProprietarioIntelectual"
+                                                 label="Declaração de não funcionário público (arquivo PDF)"
+                                                 nome="Declaração prop. intelectual não func. público"
+                                                 extensao="pdf"
+                                                 accept=".pdf, application/pdf"
+                                                 download-fn="getDeclaracaoProprietarioIntelectual"
+                                                 ng-show="fichaInscricao.proprietarioIntelecutalFuncionarioPublico === false"
+                                                 read-only="!acoes.editar">
+                                    </file-upload>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="fichaInscricao.proponenteProprietarioIntelectualProjeto === false">
+                            <label class="control-label">Proprietário intelectual participa de outro projeto inscrito?</label>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="radio-inline">
+                                        <input id="proprietarioParticipaOutrosProjetosSim" type="radio" ng-model="fichaInscricao.proprietarioIntelectualParticipaOutrosProjetos" name="proprietarioParticipaOutrosProjetos" ng-value="true">Sim
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input id="proprietarioParticipaOutrosProjetosNao" type="radio" ng-model="fichaInscricao.proprietarioIntelectualParticipaOutrosProjetos" name="proprietarioParticipaOutrosProjetos" ng-value="false">Não
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="fichaInscricao.proprietarioIntelectualParticipaOutrosProjetos === true">
+                                <div class="form-group col-md-12" show-errors>
+                                    <label for="outrosProjetosParticipantesProprietario" class="control-label">Projeto(s)</label>
+                                    <textarea id="outrosProjetosParticipantesProprietario"
+                                              name="outrosProjetosParticipantesProprietario"
+                                              class="form-control"
+                                              rows="5"
+                                              ng-model="fichaInscricao.proprietarioIntelectualProjetosParticipantes"
+                                              ng-required="fichaInscricao.proprietarioIntelectualParticipaOutrosProjetos === true"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Segmento cultural</h4>
+        <div ng-if="configuracoesRef.segmento.usarSegmentoPrincipal">
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Marcar o(s) segmento(s) cultural(ais) que seu projeto abrange; no caso de mais de um, marque até {{configuracoesRef.segmento.quantidadeMaximaSegmentos}} opções.
+            </div>
+            <div class="well">
+                <div class="panel panel-default panel-segmentos-culturais">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4" ng-repeat="segmento in segmentosCulturais">
+                                <div class="checkbox">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox"
+                                               ng-model="segmentos[segmento.id]"
+                                               ng-change="onChangeSegmentosCulturais(segmento, segmentos[segmento.id])"
+                                               ng-disabled="fichaInscricao.segmentos.length === configuracoesRef.segmento.quantidadeMaximaSegmentos && !segmentos[segmento.id]"> {{segmento.descricao}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Segmento predominante</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Indicar apenas o segmento principal dentre os marcados acima.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <select id="segmento"
+                            name="segmento"
+                            class="form-control"
+                            ng-model="fichaInscricao.segmentoPrincipal"
+                            ng-options="segmento.descricao for segmento in fichaInscricao.segmentos | orderBy: 'descricao' track by segmento.id">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div ng-if="!configuracoesRef.segmento.usarSegmentoPrincipal">
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Selecionar o segmento que seu projeto abrange.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <select id="segmento"
+                            name="segmento"
+                            class="form-control"
+                            ng-model="fichaInscricao.segmentoPrincipal"
+                            ng-change="onChangeSegmentosCulturais(segmento, segmentos[segmento.id])"
+                            ng-options="segmento.descricao for segmento in segmentosCulturais | orderBy: 'id' track by segmento.id">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="row" ng-show="fichaInscricao.segmentoPrincipal.segmentoProprioFicha === true">
+                    <div class="form-group col-sm-6 col-md-12">
+                        <label for="edtSegmentoProprioFicha" class="control-label">Descrição do segmento: (150 caracteres)</label>
+                        <input id="edtSegmentoProprioFicha" name="edtSegmentoProprioFicha" type="text" class="form-control"
+                               ng-model="fichaInscricao.segmentoUnicoFicha"
+                               ng-required="fichaInscricao.segmentoPrincipal.segmentoProprioFicha === true"
+                               maxlength="150" />
+                        <span class="label label-info">{{fichaInscricao.segmentoUnicoFicha.length || 0}} de 150 caracteres</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Natureza da proposta</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Marcar a(s) natureza(s) de sua proposta.
+        </div>
+        <div class="well">
+            <div class="panel panel-default panel-naturezas-da-proposta">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-2" ng-repeat="natureza in naturezasDaProposta">
+                            <div class="checkbox">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox"
+                                           ng-model="naturezas[natureza.id]"
+                                           ng-change="onChangeNaturezasDaProposta(natureza, naturezas[natureza.id])"> {{natureza.descricao}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Natureza predominante</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Indicar apenas a natureza principal dentre as marcadas acima.
+        </div>
+        <div class="well">
+            <div class="form-group">
+                <select id="natureza"
+                        name="natureza"
+                        class="form-control"
+                        ng-model="fichaInscricao.naturezaPrincipal"
+                        ng-options="natureza.descricao for natureza in fichaInscricao.naturezas | orderBy: 'descricao' track by natureza.id">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.textoLivre.usarResumoProjeto">
+            <h4>Resumo do projeto (sem limite de caracteres)</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong>O QUE</strong> - Apresentar uma síntese do projeto, de forma clara e sucinta em no máximo 5 linhas.
+                <strong>ATENÇÃO:</strong> este texto poderá ser utilizado pela <strong>SEDUCE</strong> para comunicação ao público em geral.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="resumoDoProjeto" name="resumoDoProjeto" class="form-control" rows="5" ng-model="fichaInscricao.resumoProjeto"></textarea>
+                </div>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.textoLivre.usarDescricaoProjeto">
+            <h4>Descrição do projeto (sem limite de caracteres)</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong>O QUE</strong> - Descrever o que deseja realizar, detalhando de forma objetiva as ações da proposta.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="descricaoDoProjeto" name="descricaoDoProjeto" class="form-control" rows="7" ng-model="fichaInscricao.descricaoProjeto"></textarea>
+                </div>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.textoLivre.usarObjetivoProjeto">
+            <h4>Objetivos do projeto (sem limite de caracteres)</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong>PARA QUE</strong> - Indicar o que se pretende alcançar com a realização da proposta apresentada e quais caminhos serão propostos para sua continuidade, quer seja para o grupo, público ou cidade visitada.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="objetivosDoProjeto" name="objetivosDoProjeto" class="form-control" rows="8" ng-model="fichaInscricao.objetivoProjeto"></textarea>
+                </div>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.textoLivre.usarJustificativaProjeto">
+            <h4>Justificativa (sem limite de caracteres)</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong>POR QUE</strong> - Esclarecer as circunstâncias que levam à realização da proposta, explicitando os motivos que favorecem a sua execução, os motivos para sua proposição na(s)
+                cidade(s) onde ocorrerão as atividades e no Estado de Goiás. Informe a contribuição do projeto, destacando o que o diferencia e justifica o aporte de recursos públicos.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="justificativa" name="justificativa" class="form-control" rows="8" ng-model="fichaInscricao.justificativaProjeto"></textarea>
+                </div>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.textoLivre.usarAcessibilidadeProjeto && configuracoesRef.textoLivre.usarDemocratizacaoProjeto">
+            <h4>Acessibilidade e Democratização</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong><u>Acessibilidade:</u></strong> Neste campo, o proponente deve informar quais ações serão adotadas (ou que o local já possui), no sentido de proporcionar
+                condições de participação - acessibilidade a pessoas idosas, nos termos do Art. 23 da Lei nº 10.741/2003, e pessoas com deficiência, conforme Lei nº 13.146/2015.
+                Os projetos culturais com financiamento estadual, deverão facilitar o livre acesso da pessoa com deficiência e pessoas idosas de modo a possibilitar o pleno exercício o pleno exercício de seus direitos culturais.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="acessibilidadeProjeto" name="acessibilidadeProjeto" class="form-control" rows="8" ng-model="fichaInscricao.acessibilidadeProjeto"></textarea>
+                </div>
+            </div>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong><u>Democratização:</u></strong> Ações e / ou atividades que visam informar, facilitar ou incluir o público que fica distante dos eventos culturais, como: estudantes de escolas públicas,
+                terceira idade, pessoas com deficiência, moradores da área rual ou distantes dos centros urbanos, perfiferia e estratégia de fidelização do público.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="democratizacaoProjeto" name="democratizacaoProjeto" class="form-control" rows="8" ng-model="fichaInscricao.democratizacaoProjeto"></textarea>
+                </div>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.textoLivre.usarDesdobramentoProjeto">
+            <h4>Desdobramento e Gerenciamento da Proposta</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong><u>Desdobramento:</u></strong> Descrever os desdobramentos e gerenciamentos da sua proposta e os possíveis ganhos da área cultural e dos envolvidos
+                no projeto. Prever parcerias e contrapartida, bom uso do recurso.
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <textarea id="desdobramentoProjeto" name="desdobramentoProjeto" class="form-control" rows="8" ng-model="fichaInscricao.desdobramentoProjeto"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="configuracoesRef.textoLivre.usarObservacoesAdicionais">
+            <h4>Observações adicionais (sem limite de caracteres)</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <strong>Caso necessárias</strong> Acrescente informações para a avaliação do projeto e que não se enquadrarem nos demais campos do formulário,
+                inclusive se o mesmo conta com parcerias ou apoios de outras instituições não remunerados.
+            </div>
+            <div class="well">
+                <textarea id="informacoesAdicionais" name="informacoesAdicionais" class="form-control" rows="7" ng-model="fichaInscricao.observacoesAdicionais"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

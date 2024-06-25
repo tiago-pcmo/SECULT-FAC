@@ -1,0 +1,37 @@
+﻿<div ng-class="{ 'form-group': !gridView }">
+    <label class="control-label" ng-show="label">{{label}}</label>
+    <div class="file-upload">
+        <div ng-class="{ 'panel panel-default': !background && !gridView }">
+            <div ng-class="{ 'panel-body': !background && !gridView }">
+                <div ng-class="{ well: background && !gridView }">
+                    <div class="form-group" ng-hide="readOnly">
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Ao selecionar um <strong><u>único</u></strong> arquivo o mesmo só <strong>será salvo e enviado ao servidor quando solicitada a operação <u>salvar</u> geral da tela</strong>.
+                            <div>
+                                <strong>PARA EXCLUIR OU SOBREPOR O ARQUIVO INSERIDO BASTA SELECIONAR UM NOVO ARQUIVO ÚNICO.</strong>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="angular.element(this).next().click()">
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> &nbsp;Selecione um arquivo
+                        </button>
+                        <input class="file-upload-input" type="file" onchange="angular.element(this).scope().onChangeFile(this)" accept="{{accept}}" />
+                    </div>
+                    <div ng-show="fileChanged">
+                        <div class="file-upload-progress" uib-tooltip="{{fileUploadResult}}" tooltip-placement="bottom">
+                            <uib-progressbar value="progress" type="{{typeProgress}}"></uib-progressbar>
+                        </div>
+                    </div>
+                    <div ng-hide="fileChanged">
+                        <button type="button" class="btn btn-default" ng-click="downloadFn(modelValue.id, downloadCallback)" ng-disabled="!(modelValue.nome && !modelValue.conteudo)" ng-hide="gridView">
+                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download
+                        </button>
+                        <a ng-href="#!" class="file-download-directive-link" ng-click="downloadFn(modelValue.id, downloadCallback)" ng-disabled="!(modelValue.nome && !modelValue.conteudo)" ng-show="gridView">
+                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

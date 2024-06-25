@@ -1,0 +1,56 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Catalogação de produtos culturais</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <ng-form name="formPrincipal" novalidate>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" st-table="catalogacaoParaAprovacao" st-safe-src="fichasParaAnalise" >
+                                        <thead>
+                                            <tr>
+                                                <th>Título</th>
+                                                <th>Arquivo</th>
+                                                <th>Data de criação</th>
+                                                <th>Observação</th>
+                                                <th>Aceito</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in catalogacaoParaAprovacao">
+                                                <td>{{item.titulo}}</td>
+                                                <td>                                                   
+                                                    <file-upload ng-model="item"
+                                                                 extensao="pdf"
+                                                                 accept=".pdf, application/pdf"
+                                                                 download-fn="downloadCatalogacao"
+                                                                 read-only="true"
+                                                                 grid-view="true">
+                                                    </file-upload>
+                                                </td>
+                                                <td>{{item.dataDeCriacao}}</td>
+                                                <td><textarea rows="4" class="col-md-12" ng-model="item.observacao" /> </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-ok" style="cursor:pointer" ng-click="aceite(item.id, item.observacao)" ng-style="{'color': item.avaliado && item.aceito ? 'green' : 'black'}"></span>
+                                                    <span class="glyphicon glyphicon-remove" style="cursor:pointer" ng-click="recuse(item.id, item.observacao)" ng-style="{'color': item.avaliado && !item.aceito ? 'red' : 'black'}"></span>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <a ng-href="#!/catalogacaoAprovacao/" class="btn btn-primary" aria-label="Left Align">Voltar</a>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

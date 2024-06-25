@@ -1,0 +1,293 @@
+﻿<div class="well">
+    <div class="row">
+        <div class="col-md-12">
+            <label>Totais</label>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="totalPreProducaoPreparacao" class="control-label">Pré-produção / Preparação (R$)</label>
+                                <strong>
+                                    <input type="text" id="totalPreProducaoPreparacao" name="totalPreProducaoPreparacao"
+                                           disabled
+                                           class="form-control"
+                                           ng-model="options.totais.totalPreProducaoPreparacao"
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="totalProducaoExecucao" class="control-label">Produção / Execução (R$)</label>
+                                <strong>
+                                    <input type="text" id="totalProducaoExecucao"
+                                           name="totalProducaoExecucao"
+                                           disabled
+                                           class="form-control"
+                                           ng-model="options.totais.totalProducaoExecucao"
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="totalDivulgacaoComercializacao" class="control-label">Divulgação / Comercialização (R$)</label>
+                                <strong>
+                                    <input type="text"
+                                           id="totalDivulgacaoComercializacao"
+                                           name="totalDivulgacaoComercializacao"
+                                           disabled
+                                           class="form-control" ng-model="options.totais.totalDivulgacaoComercializacao"
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="totalCustosAdministrativos" class="control-label">Custos administrativos (R$)</label>
+                                <strong>
+                                    <input type="text"
+                                           id="totalCustosAdministrativos"
+                                           name="totalCustosAdministrativos"
+                                           disabled
+                                           class="form-control"
+                                           ng-model="options.totais.totalCustosAdministrativos"
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="totalImpostosRecolhimento" class="control-label">Impostos / Recolhimentos (R$)</label>
+                                <strong>
+                                    <input type="text"
+                                           id="totalImpostosRecolhimento"
+                                           name="totalImpostosRecolhimento"
+                                           disabled
+                                           class="form-control"
+                                           ng-model="options.totais.totalImpostosRecolhimento"
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="totalGeralPlanilha" class="control-label">Total geral (R$)</label>
+                                <strong>
+                                    <input type="text"
+                                           id="totalGeralPlanilha"
+                                           name="totalGeralPlanilha"
+                                           disabled
+                                           class="form-control"
+                                           ng-model="options.totais.totalGeralPlanilha"
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" ng-class="{'has-success': options.totais.diferencaParaEdital === '0,00', 'has-error': options.totais.diferencaParaEdital !== '0,00'}">
+                                <label for="diferencaEdital" class="control-label">Diferença do prêmio (R$)</label>
+                                <strong>
+                                    <input type="text"
+                                           id="diferencaEdital"
+                                           name="diferencaEdital"
+                                           disabled
+                                           class="form-control"
+                                           ng-model="options.totais.diferencaParaEdital" />
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <label>{{label}}</label>
+            <div class="table-responsive">
+                <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                                </button>
+                            </th>
+                            <th st-sort="tipo.descricao">Tipo</th>
+                            <th st-sort="descricao">Descrição</th>
+                            <th st-sort="unidade">Unidade</th>
+                            <th st-sort="quantidade">Quantidade</th>
+                            <th st-sort="quantidadeUnidade">Qtd. unidade</th>
+                            <th st-sort="valorUnitario">Valor unitário</th>
+                            <th st-sort="total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in listaExibida">
+                            <td class="acoes">
+                                <div class="row">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a ng-click="edite(item)" uib-tooltip="Editar">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="exclua(item)" uib-tooltip="Excluir">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="text-left">{{item.tipo.descricao}}</td>
+                            <td class="text-left">{{item.descricao}}</td>
+                            <td>{{item.unidade}}</td>
+                            <td>{{item.quantidade | number}}</td>
+                            <td>{{item.quantidadeUnidade | number}}</td>
+                            <td class="text-right">{{item.valorUnitario | currency:"R$ "}}</td>
+                            <td class="text-right">{{item.total | currency:"R$ "}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">
+                                <div st-pagination st-items-by-page="15"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div uib-collapse="formCollapsed">
+        <ng-form name="{{form}}" novalidade>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" show-errors>
+                                <label for="listaTipo" class="control-label">Tipo</label>
+                                <select id="listaTipo" name="listaTipo" class="form-control" ng-model="item.tipo" ng-options="tipoLancamento.descricao for tipoLancamento in options.tiposLancamento track by tipoLancamento.id" required>
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group" show-errors>
+                                <label for="descricaoItemPlanilhaOrcamentaria" class="control-label">Descrição (150 caracteres)</label>
+                                <input type="text"
+                                       id="descricaoItemPlanilhaOrcamentaria"
+                                       class="form-control"
+                                       name="descricaoItemPlanilhaOrcamentaria"
+                                       ng-model="item.descricao"
+                                       ng-keypress="$event.which === 13 && salve(item)"
+                                       maxlength="150"
+                                       required />
+                                <span class="label label-info">{{item.descricao.length || 0}} de 150 caracteres</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" show-errors>
+                                <label for="unidadeItemPlanilhaOrcamentaria" class="control-label">Unidade (50 caracteres)</label>
+                                <input type="text"
+                                       id="unidadeItemPlanilhaOrcamentaria"
+                                       class="form-control"
+                                       name="unidadeItemPlanilhaOrcamentaria"
+                                       ng-model="item.unidade"
+                                       ng-keypress="$event.which === 13 && salve(item)"
+                                       maxlength="50"
+                                       required />
+                                <span class="label label-info">{{item.unidade.length || 0}} de 50 caracteres</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" show-errors>
+                                <label for="quantidadeItemPlanilhaOrcamentaria" class="control-label">Quantidade</label>
+                                <input type="text"
+                                       id="quantidadeItemPlanilhaOrcamentaria"
+                                       class="form-control"
+                                       name="quantidadeItemPlanilhaOrcamentaria"
+                                       ng-model="item.quantidade"
+                                       mask="000.000.000"
+                                       mask-number="true"
+                                       mask-options="{ reverse: true }"
+                                       ng-change="options.onChangeItem(item)"
+                                       ng-keypress="$event.which === 13 && salve(item)"
+                                       required />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" show-errors>
+                                <label for="quantidadeUnidadeItemPlanilhaOrcamentaria" class="control-label">Quantidade unidade</label>
+                                <input type="text" id="quantidadeUnidadeItemPlanilhaOrcamentaria"
+                                       class="form-control"
+                                       name="quantidadeUnidadeItemPlanilhaOrcamentaria"
+                                       ng-model="item.quantidadeUnidade"
+                                       mask="000.000.000"
+                                       mask-number="true"
+                                       mask-options="{ reverse: true }"
+                                       ng-change="options.onChangeItem(item)"
+                                       ng-keypress="$event.which === 13 && salve(item)"
+                                       required />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" show-errors>
+                                <label for="valorUnitarioItemPlanilhaOrcamentaria" class="control-label">Valor unitário (R$)</label>
+                                <input type="text"
+                                       id="valorUnitarioItemPlanilhaOrcamentaria"
+                                       class="form-control"
+                                       name="valorUnitarioItemPlanilhaOrcamentaria"
+                                       ng-model="item.valorUnitario"
+                                       mask="#.##0,00"
+                                       mask-number="true"
+                                       mask-options="{ reverse: true }"
+                                       ng-change="options.onChangeItem(item)"
+                                       ng-keypress="$event.which === 13 && salve(item)"
+                                       required />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" show-errors>
+                                <label for="valorTotalItemPlanilhaOrcamentaria" class="control-label">Valor total (R$)</label>
+                                <strong>
+                                    <input type="text"
+                                           id="valorTotalItemPlanilhaOrcamentaria"
+                                           class="form-control"
+                                           name="valorTotalItemPlanilhaOrcamentaria"
+                                           ng-model="item.total"
+                                           disabled
+                                           mask="#.##0,00"
+                                           mask-number="true"
+                                           mask-options="{ reverse: true }" />
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                    <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+                </div>
+            </div>
+        </ng-form>
+    </div>
+</div>

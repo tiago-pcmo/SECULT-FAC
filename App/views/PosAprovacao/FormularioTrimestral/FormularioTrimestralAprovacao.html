@@ -1,0 +1,91 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <h1>Aceite do Formulário Trimestral</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="listaeditais" class="control-label">Edital</label>
+                                <select id="listaeditais"
+                                        name="listaeditais"
+                                        class="form-control"
+                                        ng-model="opcoes.editalSelecionado"
+                                        ng-change="opcoes.onChangeEdital()"
+                                        ng-options="edital.descricao for edital in opcoes.editais track by edital.id"
+                                        required>
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="listaModalidades" class="control-label">Modalidade</label>
+                                <select id="listaModalidades"
+                                        name="listaModalidades"
+                                        class="form-control"
+                                        ng-model="opcoes.modalidadeSelecionada"
+                                        ng-disabled="!opcoes.editalSelecionado || !opcoes.modalidades"
+                                        ng-change="opcoes.onChangeModalidade()"
+                                        ng-options="modalidade.descricao for modalidade in opcoes.modalidades track by modalidade.id"
+                                        required>
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary" ng-click="limparFiltros()">
+                                <spam class="glyphicon glyphicon-refresh"></spam> Limpar Filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <ng-form name="formPrincipal" novalidate>
+                        <div class="text-center"><strong class="text-center">Fichas para Análise</strong></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Edital</th>
+                                            <th>Ficha</th>
+                                            <th>Formulários</th>
+                                            <th>Analisadas</th>
+                                            <th>Aprovadas</th>
+                                            <th>Reprovadas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="fichaDisponivel in fichasParaAnalise">
+                                            <td>
+                                                <a ng-href="#!/formularioTrimestralFicha/{{fichaDisponivel.codigo}}" uib-tooltip="Avaliar">
+                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                </a>
+                                            </td>
+                                            <td>{{fichaDisponivel.edital}}</td>
+                                            <td>{{fichaDisponivel.titulo}}</td>
+                                            <td>{{fichaDisponivel.documentos}}</td>
+                                            <td>{{fichaDisponivel.avaliados}}</td>
+                                            <td>{{fichaDisponivel.aprovados}}</td>
+                                            <td>{{fichaDisponivel.reprovados}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

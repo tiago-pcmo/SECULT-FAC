@@ -1,0 +1,99 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <label>{{label}}</label>
+        <div class="table-responsive">
+            <table st-table="listaExibida" st-safe-src="lista" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="novo()" ng-disabled="!formCollapsed">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                            </button>
+                        </th>
+                        <th>Edital</th>
+                        <th>Modalidade</th>
+                        <th>Módulo</th>
+                        <th st-sort="titulo">Título</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listaExibida">
+                        <td class="acoes">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a ng-click="edite(item);" uib-tooltip="Editar">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="exclua(item);" uib-tooltip="Excluir">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-left">{{item.edital.descricao}}</td>
+                        <td class="text-left">{{item.modalidade.descricao}}</td>
+                        <td class="text-left">{{item.modulo.descricao}}</td>
+                        <td class="text-left">{{item.titulo}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <div st-pagination st-items-by-page="4"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div uib-collapse="formCollapsed">
+    <ng-form name="{{form}}" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group" show-errors>
+                            <label for="listaEditais{{form.replace('form', '')}}" class="control-label">Edital</label>
+                            <select id="listaEditais{{form.replace('form', '')}}" name="listaEditais{{form.replace('form', '')}}" class="form-control" ng-model="item.edital" ng-change="options.onChangeEdital(item.edital)" ng-options="edital.descricao for edital in options.editais track by edital.id" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="listaModalidades{{form.replace('form', '')}}" class="control-label">Modalidade</label>
+                            <select id="listaModalidades{{form.replace('form', '')}}" name="listaModalidades{{form.replace('form', '')}}" class="form-control" ng-model="item.modalidade" ng-disabled="!item.edital" ng-change="options.onChangeModalidade(item.modalidade)" ng-options="modalidade.descricao for modalidade in options.modalidades track by modalidade.id" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" show-errors>
+                            <label for="listaModulos{{form.replace('form', '')}}" class="control-label">Módulo</label>
+                            <select id="listaModulos{{form.replace('form', '')}}" name="listaModulos{{form.replace('form', '')}}" class="form-control" ng-model="item.modulo" ng-disabled="!item.modalidade" ng-change="options.onchangeModulo(item.modulo)" ng-options="modulo.descricao for modulo in options.modulos track by modulo.id" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group" show-errors>
+                            <label for="fichasInscricao{{form.replace('form', '')}}" class="control-label">Ficha de inscrição</label>
+                            <select id="fichasInscricao{{form.replace('form', '')}}" name="fichasInscricao{{form.replace('form', '')}}" class="form-control" ng-model="item" ng-disabled="!item.modulo" ng-options="fichainscricao.titulo for fichainscricao in options.fichasInscricao track by fichainscricao.id" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" ng-click="salve(item)">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="cancele()">Cancelar</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

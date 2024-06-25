@@ -1,0 +1,26 @@
+﻿@media (min-width: 992px) {
+    .ficha-inscricao .titulo-recurso {
+        margin-top: 28px;
+    }
+}
+
+.panel-segmentos-culturais .checkbox, .panel-naturezas-da-proposta .checkbox {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.ficha-inscricao {
+    margin-bottom: 20px;
+}
+
+    .ficha-inscricao .info-planilha-orcamentaria {
+        display: inline-flex;
+    }
+
+        .ficha-inscricao .info-planilha-orcamentaria span.glyphicon {
+            margin-right: 8px;
+        }
+
+.gera-pdf-abas {
+    cursor: pointer;
+}

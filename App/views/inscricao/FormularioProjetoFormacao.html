@@ -1,0 +1,234 @@
+﻿<h4>Projeto de formação</h4>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="tipoFormacao" class="control-label">Tipo de formação</label>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input id="tipoFormacao" name="tipoFormacao" type="radio" value="0" ng-value="0" ng-model="fichaInscricao.formularioProjetoFormacao.tipo" />Curso
+                        </label>
+                        <label class="radio-inline">
+                            <input id="tipoFormacao" name="tipoFormacao" type="radio" value="1" ng-value="1" ng-model="fichaInscricao.formularioProjetoFormacao.tipo" />Oficina
+                        </label>
+                        <label class="radio-inline">
+                            <input id="tipoFormacao" name="tipoFormacao" type="radio" value="2" ng-value="2" ng-model="fichaInscricao.formularioProjetoFormacao.tipo" />Seminário
+                        </label>
+                        <label class="radio-inline">
+                            <input id="tipoFormacao" name="tipoFormacao" type="radio" value="3" ng-value="3" ng-model="fichaInscricao.formularioProjetoFormacao.tipo" />Residência
+                        </label>
+                        <label class="radio-inline">
+                            <input id="tipoFormacao" name="tipoFormacao" type="radio" value="4" ng-value="4" ng-model="fichaInscricao.formularioProjetoFormacao.tipo" />Intercâmbio
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" show-errors>
+                        <label for="nomeProjeto" class="control-label">Nome do projeto (200 caracteres)</label>
+                        <input type="text" id="nomeProjeto" name="nomeProjeto" class="form-control" ng-model="fichaInscricao.formularioProjetoFormacao.nomeProjeto"
+                               maxlength="200" />
+                        <span class="label label-info">{{fichaInscricao.formularioProjetoFormacao.nomeProjeto.length || 0}} de 200 caracteres</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" show-errors>
+                        <label for="nomeCursoOficina" class="control-label">Nome curso / oficina (200 caracteres)</label>
+                        <input type="text" id="nomeCursoOficina" name="nomeCursoOficina" class="form-control" ng-model="fichaInscricao.formularioProjetoFormacao.nomeCursoOficina"
+                               maxlength="200" />
+                        <span class="label label-info">{{fichaInscricao.formularioProjetoFormacao.nomeCursoOficina.length || 0}} de 200 caracteres</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="ementa" class="control-label">Ementa (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Resumo do conteúdo do curso / oficina em tópicos.
+                        </div>
+                        <textarea id="ementa" name="ementa" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.ementa"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="objetivos" class="control-label">Objetivos (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Objetivos gerais e específicos do curso / oficina.
+                        </div>
+                        <textarea id="objetivos" name="objetivos" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.objetivos"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="publicoAlvo" class="control-label">Público alvo (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Características preferenciais do público a ser trabalhado. Ex: Nível de formação, sexo, faixa de renda, local de moradia, membro de uma comunidade ou grupo, etc.
+                        </div>
+                        <textarea id="publicoAlvo" name="publicoAlvo" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.publicoAlvo"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-6">
+                    <div class="form-group" show-errors>
+                        <label for="faixaEtaria" class="control-label">Faixa etária (sem limite de caracteres)</label>
+                        <textarea id="faixaEtaria" name="faixaEtaria" class="form-control" rows="5" ng-model="fichaInscricao.formularioProjetoFormacao.faixaEtaria"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div class="form-group" show-errors>
+                        <label for="preRequisitosInscricao" class="control-label">Pré-requisitos para inscrição (sem limite de caracteres)</label>
+                        <textarea id="preRequisitosInscricao" name="preRequisitosInscricao" rows="5" class="form-control" ng-model="fichaInscricao.formularioProjetoFormacao.preRequisitosParaInscricao"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group" show-errors>
+                        <label for="numeroTurmas" class="control-label">Número de turmas</label>
+                        <input type="text" id="numeroTurmas" name="numeroTurmas" class="form-control" mask="9999" ng-model="fichaInscricao.formularioProjetoFormacao.numeroTurmas" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group" show-errors>
+                        <label for="numeroParticipantesPorTurma" class="control-label">Participantes por turma</label>
+                        <input type="text" id="numeroParticipantesPorTurma" name="numeroParticipantesPorTurma" class="form-control" mask="9999" ng-model="fichaInscricao.formularioProjetoFormacao.numeroParticipantesPorTurma" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="metodologia" class="control-label">Metodologia (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Métodos e técnicas utilizadas no curso / oficina para atingir seus objetivos.
+                        </div>
+                        <textarea id="metodologia" name="metodologia" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.metodologia"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="recursosDidaticos" class="control-label">Recursos didáticos (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Equipamentos ou materiais que serão utilizados no curso / oficina.
+                        </div>
+                        <textarea id="recursosDidaticos" name="recursosDidaticos" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.recursosDidaticos"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-6">
+                    <div class="form-group" show-errors>
+                        <label for="periodicidade" class="control-label">Periodicidade (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Duração ou frequência do curso / oficina. Ex: 15 dias, 1 semana, 6 meses, etc.
+                        </div>
+                        <textarea id="periodicidade" name="periodicidade" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.periodicidade"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div class="form-group" show-errors>
+                        <label for="cargaHoraria" class="control-label">Carga horária (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Distribuição da carga horária do curso, sendo 40h o mínimo por curso e 2h o mínimo por oficina. Ex: Segunda, Quarta e Sexta 4h. Sábado 8h.
+                        </div>
+                        <textarea id="cargaHoraria" name="cargaHoraria" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.cargaHoraria"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="conteudo" class="control-label">Conteúdo (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Assuntos que serão trabalhados no curso / oficina.
+                        </div>
+                        <textarea id="conteudo" name="conteudo" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.conteudo"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Avaliação</h4>
+                </div>
+            </div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" show-errors>
+                            <label for="instrumentoAvaliacaoCursoOficina" class="control-label">Instrumento de avaliação do curso / oficina (sem limite de caracteres)</label>
+                            <div class="alert alert-info" role="alert">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                Forma de avaliação do curso / oficina, indicando como os professores / oficineiros avaliarão os participantes.
+                            </div>
+                            <textarea id="instrumentoAvaliacaoCursoOficina" name="instrumentoAvaliacaoCursoOficina" rows="5" class="form-control" ng-model="fichaInscricao.formularioProjetoFormacao.instrumentoAvaliacaoCursoOficina"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group" show-errors>
+                            <label for="instrumentoAvaliacaoParticipantesCursoOficina" class="control-label">Instrumento de avaliação dos participantes do curso / oficina (sem limite de caracteres)</label>
+                            <div class="alert alert-info" role="alert">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                Forma como os participantes irão avaliar o curso / oficina. Ex: opinando sobre os instrutores, material didático, etc.
+                            </div>
+                            <textarea id="instrumentoAvaliacaoParticipantesCursoOficina"
+                                      name="instrumentoAvaliacaoParticipantesCursoOficina"
+                                      class="form-control"
+                                      ng-model="fichaInscricao.formularioProjetoFormacao.instrumentoAvaliacaoParticipantesCursoOficina" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="certificacao" class="control-label">Certificação (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Critérios para recebimento dos certificados.
+                        </div>
+                        <textarea id="certificacao" name="certificacao" class="form-control" rows="7" ng-model="fichaInscricao.formularioProjetoFormacao.certificacao"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group" show-errors>
+                        <label for="valorInscricaoAdesaoPorParticipante" class="control-label">Valor de inscrição ou adesão por participante (R$)</label>
+                        <input type="text" mask="#.##0,00" mask-number="true" mask-options="{ reverse: true }" id="valorInscricaoAdesaoPorParticipante" name="valorInscricaoAdesaoPorParticipante" class="form-control"
+                               ng-model="fichaInscricao.formularioProjetoFormacao.valorInscricaoAdesaoPorParticipante" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" show-errors>
+                        <label for="referencia" class="control-label">Referências (sem limite de caracteres)</label>
+                        <div class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Indique bibliografias que serão utilizados como referência na ação formativa.
+                        </div>
+                        <textarea id="referencia" name="referencia" class="form-control" ng-model="fichaInscricao.formularioProjetoFormacao.referencia" rows="7"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

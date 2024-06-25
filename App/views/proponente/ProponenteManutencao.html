@@ -1,0 +1,204 @@
+﻿<div class="row" ng-init="modoEdicao && inicialize()">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Proponente - {{acao}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form name="formPrincipal" class="form-proponente" ng-submit="submit(formPrincipal)" novalidate>
+                    <h4>Tipo de proponente</h4>
+                    <div class="well">
+                        <div class="row">
+                            <div class="form-group col-md-12" ng-init="proponente.tipo='JURIDICA'">
+                                <label class="radio-inline">
+                                    <input id="juridica" type="radio" ng-model="proponente.tipo" name="tipo" value="JURIDICA" ng-disabled="modoEdicao" ng-change="tipoPessoa('JURIDICA')">Pessoa jurídica
+                                </label>
+                                <label class="radio-inline">
+                                    <input id="fisica" type="radio" ng-model="proponente.tipo" name="tipo" value="FISICA" ng-disabled="modoEdicao" ng-change="tipoPessoa('FISICA')">Pessoa física
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="juridica">
+                        <h4>Dados do proponente</h4>
+                        <div class="well">
+                            <div class="row">
+                                <div class="form-group col-md-3" show-errors>
+                                    <label for="cnpj" class="control-label">CNPJ</label>
+                                    <input id="cnpj" name="cnpj" type="text" class="form-control" ng-model="proponente.cnpj" ng-required="juridica" mask="00.000.000/0000-00" ng-disabled="modoEdicao">
+                                </div>
+                                <div class="form-group col-md-6" show-errors>
+                                    <label for="razaosocial" class="control-label">Instituição/razão social</label>
+                                    <input id="razaosocial" name="razaosocial" type="text" class="form-control" ng-model="proponente.nome" ng-required="juridica">
+                                </div>
+                                <div class="form-group col-md-3" show-errors>
+                                    <label for="dataCriacao" class="control-label">Data de criação pessoa jurídica</label>
+                                    <input id="dataCriacao" name="dataCriacao" type="text" class="form-control" ng-model="proponente.dataNascimento" ng-required="juridica" mask="00/00/0000" mask-clean="false">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6" show-errors>
+                                    <label for="responsavelEmpresa" class="control-label">Nome do responsável pela empresa</label>
+                                    <input id="responsavelEmpresa" name="responsavelEmpresa" type="text" class="form-control" ng-model="proponente.nomeResponsavelEmpresa" ng-required="juridica">
+                                </div>
+                                <div class="form-group col-md-3" show-errors>
+                                    <label for="rgResponsavelEmpresa" class="control-label">RG do responsável pela empresa</label>
+                                    <input id="rgResponsavelEmpresa" name="rgResponsavelEmpresa" type="text" class="form-control" ng-model="proponente.rgResponsavelEmpresa" ng-required="juridica">
+                                </div>
+                                <div class="form-group col-md-3" show-errors>
+                                    <label for="cpfResponsavelEmpresa" class="control-label">CPF do responsável pela empresa</label>
+                                    <input id="cpfResponsavelEmpresa" name="cpfResponsavelEmpresa" type="text" class="form-control" ng-model="proponente.cpfResponsavelEmpresa" ng-required="juridica" mask="000.000.000-00">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12" show-errors>
+                                    <label for="diretor" class="control-label">Diretor</label>
+                                    <input id="diretor" name="diretor" type="text" class="form-control" ng-model="proponente.nomeDiretorEmpresa" ng-required="juridica">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="juridica">
+                        <!-- Pessoa Jurídica -->
+                        <h4>Conforme estatuto/contrato social</h4>
+                        <div class="well">
+                            <div class="row">
+                                <div class="form-group col-md-12" ng-init="proponente.finsLucrativos=false">
+                                    <label class="radio-inline">
+                                        <input id="semLucro" type="radio" ng-model="proponente.finsLucrativos" name="lucrativo" ng-value="false">Sem fins lucrativos
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input id="comLucro" type="radio" ng-model="proponente.finsLucrativos" name="lucrativo" ng-value="true">Com fins lucrativos
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Contato do proponente</h4>
+                        <div class="well">
+                            <div class="row">
+                                <div class="form-group col-md-2" show-errors>
+                                    <label for="telefoneProponente" class="control-label">Telefone da instituição</label>
+                                    <input id="telefoneProponente" name="telefoneProponente" type="text" class="form-control" ng-model="proponente.telefone" ng-required="juridica" mask="(00) 000000000">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="fax" class="control-label">Fax da instituição</label>
+                                    <input id="fax" name="fax" type="text" class="form-control" ng-model="proponente.fax" mask="(00) 00000000">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="site" class="control-label">Site da instituição</label>
+                                    <input id="site" name="site" type="text" class="form-control" ng-model="proponente.site">
+                                </div>
+                                <div class="form-group col-md-5" show-errors>
+                                    <label for="email" class="control-label">Email</label>
+                                    <input id="email" name="email" type="email" class="form-control" ng-model="proponente.email" ng-pattern="/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" ng-required="juridica">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dirigente -->
+                        <div ng-include="'App/views/proponente/Dirigente.html'" ng-show="juridica"></div>
+                    </div>
+
+                    <!-- Pessoa física -->
+                    <div ng-include="'App/views/proponente/PessoaFisica.html'" ng-show="!juridica"></div>
+
+                    <h4>Endereço do proponente</h4>
+                    <div class="well">
+                        <div class="row">
+                            <div class="form-group col-md-12" ng-init="proponente.endereco.tipo='EMPRESARIAL'">
+                                <label class="radio-inline">
+                                    <input id="residendical" name="tipoEndereco" type="radio" ng-model="proponente.endereco.tipo" value="RESIDENCIAL">Residencial
+                                </label>
+                                <label class="radio-inline">
+                                    <input id="empresarial" name="tipoEndereco" type="radio" ng-model="proponente.endereco.tipo" value="EMPRESARIAL">Empresarial
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-2" show-errors>
+                                <label for="cep" class="control-label">CEP</label>
+                                <input id="cep" name="cep" type="text" class="form-control" ng-model="proponente.endereco.cep" ng-blur="onCepChange('FISICA')" mask="00000-000" required>
+                            </div>
+                            <div class="form-group col-md-5" show-errors>
+                                <label for="logradouro" class="control-label">Logradouro</label>
+                                <input id="logradouro" name="logradouro" type="text" class="form-control" ng-model="proponente.endereco.logradouro" required>
+                            </div>
+                            <div class="form-group col-md-5" show-errors>
+                                <label for="complemento" class="control-label">Complemento</label>
+                                <input id="complemento" name="complemento" type="text" class="form-control" ng-model="proponente.endereco.complemento" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-2" show-errors>
+                                <label for="numero" class="control-label">Número</label>
+                                <input id="numero" name="numero" type="text" class="form-control" ng-model="proponente.endereco.numero" required>
+                            </div>
+                            <div class="form-group col-md-4" show-errors>
+                                <label for="bairro" class="control-label">Bairro</label>
+                                <input id="bairro" name="bairro" type="text" class="form-control" ng-model="proponente.endereco.bairro" required>
+                            </div>
+                            <div class="form-group col-md-4" show-errors>
+                                <label for="municipio" class="control-label">Município</label>
+                                <input id="municipio" name="municipio" type="text" class="form-control" ng-model="proponente.endereco.municipio" required>
+                            </div>
+                            <div class="form-group col-md-2" show-errors>
+                                <label for="uf" class="control-label">UF</label>
+                                <select id="uf" name="uf" class="form-control" ng-model="proponente.endereco.uf" required>
+                                    <option value="">Selecione</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AP">AP</option>
+                                    <option value="AM">AM</option>
+                                    <option value="BA">BA</option>
+                                    <option value="CE">CE</option>
+                                    <option value="DF">DF</option>
+                                    <option value="ES">ES</option>
+                                    <option value="GO">GO</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MT">MT</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MG">MG</option>
+                                    <option value="PR">PR</option>
+                                    <option value="PB">PB</option>
+                                    <option value="PA">PA</option>
+                                    <option value="PE">PE</option>
+                                    <option value="PI">PI</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="RN">RN</option>
+                                    <option value="RS">RS</option>
+                                    <option value="RO">RO</option>
+                                    <option value="RR">RR</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SE">SE</option>
+                                    <option value="SP">SP</option>
+                                    <option value="TO">TO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Dados de acesso</h4>
+                    <div class="well">
+                        <div class="row">
+                            <div class="form-group col-md-4" show-errors>
+                                <label for="identificacao" class="control-label">Usuário</label>
+                                <input id="identificacao" name="identificacao" type="text" class="form-control" ng-model="proponente.usuario" ng-required="!modoEdicao" ng-disabled="modoEdicao">
+                            </div>
+                            <div class="form-group col-md-4" show-errors ng-show="!modoEdicao">
+                                <label for="senha" class="control-label">Senha</label>
+                                <input id="senha" name="senha" type="password" class="form-control" ng-model="proponente.senha" ng-required="!modoEdicao">
+                            </div>
+
+                            <div class="form-group col-md-4" col-md-6 show-errors ng-show="!modoEdicao">
+                                <label for="confirmarSenha" class="control-label">Confirmar senha</label>
+                                <input id="confirmarSenha" name="confirmarSenha" type="password" class="form-control" field-match="senha" ng-model="proponente.confirmarSenha" ng-required="!modoEdicao">
+                                <span class="help-block" ng-show="formPrincipal.confirmarSenha.$error.fieldmatch">Senha e confirmação de senha não conferem.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-danger" ng-click="exclua()" ng-show="modoEdicao">Excluir</button>
+                    <button type="button" class="btn btn-primary" ng-click="cancele()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

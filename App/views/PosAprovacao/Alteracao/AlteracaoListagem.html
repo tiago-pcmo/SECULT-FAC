@@ -1,0 +1,67 @@
+﻿<div class="row" ng-init="inicialize()">
+    <div class="col-md-12">
+        <h1>Alterações</h1>
+        <hr />
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+
+                        <div class="table-responsive">
+                            <table st-table="alteracoesExibidas" st-safe-src="alteracoesListagem" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <button type="button" class="btn btn-primary btn-xs" ng-click="nova()">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo
+                                            </button>
+                                        </th>
+                                        <th>Titulo</th>
+                                        <th>Ordem</th>
+                                        <th>Download</th>
+                                        <th>Situação</th>
+                                        <th>Observação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="alteracao in alteracoesExibidas">
+                                        <td class="acoes">
+                                            <div class="row">
+                                                <ul class="list-inline">
+                                                    <li>
+                                                        <a ng-href="#!/alteracao/{{alteracao.id}}" uib-tooltip="Editar">
+                                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a ng-click="exclua(alteracao.id)" uib-tooltip="Excluir" ng-hide="alteracao.avaliado">
+                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>{{alteracao.titulo}}</td>
+                                        <td>{{alteracao.linha}}</td>
+                                        <td>
+                                            <file-upload ng-model="alteracao" ng-hide="alteracao.tamanho < 0.0001"
+                                                         extensao="pdf"
+                                                         accept=".pdf, application/pdf"
+                                                         download-fn="downloadDocumento"
+                                                         read-only="true"
+                                                         grid-view="true">
+                                            </file-upload>
+                                        </td>
+                                        <td ng-style="{'color': !alteracao.avaliado ? 'black' : alteracao.aceito ? 'green' : 'red'}">{{ !alteracao.avaliado ? 'Em análise' : alteracao.aceito ? 'Aceito' : 'Recusado'}}</td>
+                                        <td>{{alteracao.motivoRecusa}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a ng-href="#!/inscricao/" class="btn btn-primary" aria-label="Left Align">Voltar</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,255 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h4>Plano básico de divulgação</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Descrever as estratégias de divulgação, mobilização, promoção e acesso da população à ação ou ao bem cultural realizado com apoio do Fundo de Cultura.
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="pecaDivulgacao" class="control-label">Peça de divulgação (sem limite de caracteres)</label>
+                        <textarea id="pecaDivulgacao" name="pecaDivulgacao" class="form-control" rows="4" ng-model="fichaInscricao.planoDivulgacao.pecaDivulgacao"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="localDivulgacao" class="control-label">Local de divulgação (sem limite de caracteres)</label>
+                        <textarea id="localDivulgacao" name="localDivulgacao" class="form-control" rows="4" ng-model="fichaInscricao.planoDivulgacao.localDivulgacao"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="periodoExposicao" class="control-label">Período de exposição (sem limite de caracteres)</label>
+                        <textarea id="periodoExposicao" name="periodoExposicao" class="form-control" rows="4" ng-model="fichaInscricao.planoDivulgacao.periodoExposicao"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="publicoAlvo" class="control-label">Público alvo (sem limite de caracteres)</label>
+                        <textarea id="publicoAlvo" name="publicoAlvo" class="form-control" rows="4" ng-model="fichaInscricao.planoDivulgacao.publicoAlvo"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Quadro de resumo das peças de divulgação e da inserção dos créditos ao Fundo Cultural</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Descrever as peças de divulgação da ação ou do produto cultural, de forma a prever a inserção das logomarcas do
+            Governo de Goiás e da SEDUCE, além da menção ao apoio do Fundo Cultural, permitindo a avaliação na prestação de contas.
+        </div>
+        <div class="alert alert-warning" role="alert">
+            <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+            &nbsp;A INSERÇÃO DAS LOGOMARCAS E DA MENÇÃO OBRIGATÓRIA AO APOIO DO FUNDO DE ARTE E CULTURA DO ESTADO DE GOIÁS NO MATERIAL DE DIVULGAÇÃO E DE
+            APRESENTAÇÃO DO PRODUTO GERADO PELO PROJETO DEVE SEGUIR O PADRÃO DETERMINADO PELA <u>SEDUCE</u>.
+        </div>
+        <div class="well">
+            <grid-edit ng-model="fichaInscricao.quadroResumoPecasDivulgacaoInsercaoCreditoFca" form="formQuadroResumoDivulgacao" template-url="App/views/inscricao/QuadroResumoDivulgacao.html"></grid-edit>
+        </div>
+        <h4>Recursos utilizados no projeto</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Informe o plano de aplicação de recursos do projeto e suas fontes. <strong>ORÇAMENTO: preencher em planilha orçamentária específica, informando aqui apenas os valores totais.</strong>
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-4 titulo-recurso">
+                    <label class="control-label">Recursos solicitados ao Fundo de Arte e Cultura:</label>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="valorRecursoSolicitadoFundo" class="control-label">Valor (R$)</label>
+                        <input id="valorRecursoSolicitadoFundo"
+                               name="valorRecursoSolicitadoFundo"
+                               type="text"
+                               class="form-control"
+                               ng-model="fichaInscricao.recursoSolicitadoFundo"
+                               mask="#.##0,00"
+                               mask-number="true"
+                               mask-options="{ reverse: true }"
+                               disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="percentualRecursoSolicitadoFundo" class="control-label">Percentual</label>
+                    <div class="form-group input-group">
+                        <input id="percentualRecursoSolicitadoFundo" name="percentualRecursoSolicitadoFundo" type="text" class="form-control text-right" ng-model="fichaInscricao.percentualSolicitadoFundo" disabled />
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 titulo-recurso">
+                    <label class="control-label">Outras fontes de recurso (especificar abaixo):</label>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="valorRecursosOutrasFontes" class="control-label">Valor (R$)</label>
+                        <input id="valorRecursosOutrasFontes"
+                               name="valorRecursosOutrasFontes"
+                               type="text"
+                               class="form-control"
+                               ng-model="fichaInscricao.recursosOutrasFontes"
+                               mask="#.##0,00"
+                               mask-number="true"
+                               mask-options="{ reverse: true }"
+                               ng-change="onChangeRecursoOutrasFontes()" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="percentualOutrasFontes" class="control-label">Percentual</label>
+                    <div class="form-group input-group">
+                        <input id="percentualOutrasFontes" name="percentualOutrasFontes" type="text" class="form-control text-right" ng-model="fichaInscricao.percentualOutrasFontes" disabled />
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 titulo-recurso">
+                    <label class="control-label">TOTAL:</label>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="totalDeRecursosDoProjeto" class="control-label">Valor (R$)</label>
+                        <strong>
+                            <input id="totalDeRecursosDoProjeto"
+                                   name="totalDeRecursosDoProjeto"
+                                   type="text"
+                                   class="form-control"
+                                   ng-model="totalDeRecursosDoProjeto"
+                                   mask="#.##0,00"
+                                   mask-number="true"
+                                   mask-options="{ reverse: true }"
+                                   disabled />
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="totalPercentualDeRecursosDoProjeto" class="control-label">Percentual</label>
+                    <div class="form-group input-group">
+                        <strong>
+                            <input id="totalPercentualDeRecursosDoProjeto" name="totalPercentualDeRecursosDoProjeto" type="text" class="form-control text-right" value="100" disabled />
+                        </strong>
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Detalhamento da previsão de recursos de outras fontes (estimativas)</h4>
+                            <div class="alert alert-info" role="alert">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                Se houver recursos de outras fontes <u>é necessário inserir, no arquivo PDF único da aba <strong>Anexos</strong>, o detalhamento dos recursos de outras fontes</u>.
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" show-errors>
+                                        <label for="recursosPropriosProponente" class="control-label">Recursos próprios do proponente (R$)</label>
+                                        <input id="recursosPropriosProponente"
+                                               name="recursosPropriosProponente"
+                                               type="text"
+                                               class="form-control"
+                                               ng-model="fichaInscricao.detalhamentoPrevisaoRecursosOutrasFontes.recursosPropriosProponente"
+                                               mask="#.##0,00"
+                                               mask-number="true"
+                                               mask-options="{ reverse: true }"
+                                               ng-change="onChangeRecursoOutrasFontes()"
+                                               ng-required="valorOutrasFontesRequerido" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" show-errors>
+                                        <label for="receitaPrevista" class="control-label">Receita prevista (R$)</label>
+                                        <input id="receitaPrevista"
+                                               name="receitaPrevista"
+                                               type="text"
+                                               class="form-control"
+                                               ng-model="fichaInscricao.detalhamentoPrevisaoRecursosOutrasFontes.receitaPrevista"
+                                               mask="#.##0,00"
+                                               mask-number="true"
+                                               mask-options="{ reverse: true }"
+                                               ng-change="onChangeRecursoOutrasFontes()"
+                                               ng-required="valorOutrasFontesRequerido" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" show-errors>
+                                        <label for="outraFonteApoiadora" class="control-label">Outra fonte apoiadora (150 caracteres)</label>
+                                        <input id="outraFonteApoiadora"
+                                               name="outraFonteApoiadora"
+                                               type="text"
+                                               class="form-control"
+                                               ng-model="fichaInscricao.detalhamentoPrevisaoRecursosOutrasFontes.outraFonteApoiadora"
+                                               ng-change="onChangeRecursoOutrasFontes()"
+                                               ng-required="valorOutrasFontesRequerido || outraFonteApoiadoraRequerida"
+                                               maxlength="150" />
+                                        <span class="label label-info">{{fichaInscricao.detalhamentoPrevisaoRecursosOutrasFontes.outraFonteApoiadora.length || 0}} de 150 caracteres</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" show-errors>
+                                        <label for="valorOutraFonteApoiadora" class="control-label">Recurso outra fonte apoiadora (R$)</label>
+                                        <input id="valorOutraFonteApoiadora"
+                                               name="valorOutraFonteApoiadora"
+                                               type="text"
+                                               class="form-control"
+                                               ng-model="fichaInscricao.detalhamentoPrevisaoRecursosOutrasFontes.valorOutraFonteApoiadora"
+                                               mask="#.##0,00"
+                                               mask-number="true"
+                                               mask-options="{ reverse: true }"
+                                               ng-change="onChangeRecursoOutrasFontes()"
+                                               ng-required="valorOutrasFontesRequerido || outraFonteApoiadoraRequerida" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="configuracoesRef.detalharRecursosUtilizados">
+            <h4>Informações sobre apoios financeiros de outras fontes</h4>
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Informe se o projeto já foi beneficiado ou encontra-se em tramitação em algum mecanismo de apoio, como o Fundo de Cultura,
+                Programa Goyazes, Lei Rouanet, FNC, leis municipais de incentivo e/ou outros mecanismos ou formas existentes.
+            </div>
+            <div class="well">
+                <grid-edit ng-model="fichaInscricao.apoiosFinanceirosOutrasFontes" form="formApoiosFinanceirosOutrasFontes" template-url="App/views/inscricao/ApoiosFinanceirosOutrasFontes.html"></grid-edit>
+            </div>
+        </div>
+        <h4>Geração de Renda</h4>
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Indicar os profissionais que ocuparão posto de trabalho em virtude da realização do projeto.
+            Obs: Identificação destes profissionais remunerados deverá constar na planilha orçamentária.
+            <br />
+            Exemplo: <br />
+            <strong>Empregos Diretos:</strong> Produtor musical = 01 Músicos = 08 Técnico de som = 01 Programador Visual = 01 Contador = 01 Total = 12<br />
+            <strong>Empregos Indiretos:</strong> Lojistas do ramo de música, equipe técnica de estúdio, diagramador,  funcionários da gráfica, etc.
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="geracaoEmpregosDiretos" class="control-label">Empregos diretos (sem limite de caracteres)</label>
+                        <textarea id="geracaoEmpregosDiretos" name="geracaoEmpregosDiretos" class="form-control" ng-model="fichaInscricao.geracaoRenda.quantidadeEmpregadosDiretos" rows="7"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="geracaoEmpregosIndiretos" class="control-label">Empregos indiretos (sem limite de caracteres)</label>
+                        <textarea id="geracaoEmpregosIndiretos" name="geracaoEmpregosIndiretos" class="form-control" ng-model="fichaInscricao.geracaoRenda.quantidadeEmpregadosIndiretos" rows="7"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
